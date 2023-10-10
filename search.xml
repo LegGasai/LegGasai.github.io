@@ -4,12 +4,60 @@
   
     
     <entry>
+      <title>On the Robustness of Code Generation Techniques:An Empirical Study on GitHub Copilot</title>
+      <link href="/posts/98da000b/"/>
+      <url>/posts/98da000b/</url>
+      
+        <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>背景：我们在让大模型帮我们生成代码的时候，不同的需求描述对于模型生成的代码影响有多大。换个描述很可能会生成完全不同的结果。</p><p>研究目的：对于代码生成模型（以Github Copilot为例），不同但语义等效的自然语言描述是否会产生相同的推荐功能（代码）。</p><p>测试方法：892个Java methods来自1401个开源项目，将方法上方的注释作为输入给模型</p><p>生成释义的自动化工具：PEGASUS and TP</p><p>原始释义-一组语义等效的释义描述（使用PEGASUS and TP生成）</p><p>解释一下自动释义技术</p><ul><li><p>PEGASUS</p></li><li><p>TP</p></li></ul><h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>问题：</p><ul><li>RQ0:自动释义技术可以在多大程度上用于测试基于深度学习的代码生成器的鲁棒性？</li><li>RQ1:GitHub Copilot 的输出在多大程度上受到开发人员作为输入提供的代码描述的影响？</li></ul><p>&lt;method,code_description&gt;</p><p>892个方法：<br><img src="/../../img/Pasted%20image%2020231008222237.png"><br>TP：只生成792个有效释义，其中非等效占比<br>PEGASUS：生成891个有效释义，其中非等效占比<br>手工：认为全部有效，且等效892</p><p>一共：792+891+892&#x3D;2575   原始释义892 共2575+892&#x3D;3467，两个上下文场景* 2&#x3D;6934次调用</p><h1 id="研究结果"><a href="#研究结果" class="headerlink" title="研究结果"></a>研究结果</h1><p>RQ0:</p><p>RQ1:</p><h1 id="局限性："><a href="#局限性：" class="headerlink" title="局限性："></a>局限性：</h1><ul><li>通过测试未必意味着生成代码的正确，使用CodeBLEU和编辑距离</li><li>自动化模拟脚本不能够完全代替模型对于开发者的帮助，开发人员也许会参考模型生成的结果后，灵活变通。</li><li>在判断语义等效性时，作者的主观性</li><li>892个数据集中可能部分已经被用于训练copilot，导致结果的不准确</li><li>仅考虑了Java语言</li></ul><h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ul><li>46%情况下，不同但语义相同的描述会导致生成代码的不同。</li><li>目前代码生成模型效果一般，仅有13%的生成代码能够通过测试，但作者说了（一部分原因是选取的待生成方法比较复杂，见图，圈复杂度等）</li><li>要让模型输出正确的代码，必须使用语义等效的描述之一（不好把控，评价指标没说）</li><li>提高开发者对代码的描述准确性</li><li>对DWF来说，如果内嵌AI助手，更需要用户能够准确的提供他们的需求&#x2F;描述以获得期望的结果。</li><li>最佳实践：可以尝试输入给模型多种不同但意思相近的描述，对比生成的结果，选最佳的</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 大模型 </tag>
+            
+            <tag> #论文 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Lang Chain介绍</title>
+      <link href="/posts/887510fe/"/>
+      <url>/posts/887510fe/</url>
+      
+        <content type="html"><![CDATA[<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p>JS版：<a href="https://github.com/langchain-ai/langchainjs">langchain-ai&#x2F;langchainjs (github.com)</a><br>Python版：<a href="https://github.com/langchain-ai/langchain">langchain-ai&#x2F;langchain: ⚡ Building applications with LLMs through composability ⚡ (github.com)</a></p><p>论文链接：<br><a href="https://arxiv.org/pdf/2205.10583.pdf">Automated Repair of Programs from Large Language Models</a><br><a href="https://arxiv.org/pdf/2210.14179.pdf">Practical Program Repair in the Era of Large Pre-trained Language Models</a><br><a href="https://arxiv.org/pdf/2302.06144v2.pdf">SKCODER: A Sketch-based Approach for Automatic Code Generation</a><br><a href="https://arxiv.org/pdf/2302.03482.pdf">Keeping Pace with Ever-Increasing Data: Towards Continual Learning of Code Intelligence Models</a><br><a href="https://arxiv.org/pdf/2302.05020.pdf">Impact of Code Language Models on Automated Program Repair</a><br>[An Empirical Study of Pre-Trained Model Reuse in the Hugging Face Deep Learning Model Registry](<a href="https://arxiv.org/pdf/2303.02552.pdf">https://arxiv.org/pdf/2303.02552.pdf</a><br><a href="https://arxiv.org/pdf/2302.04030.pdf">CrossCodeBench: Benchmarking Cross-Task Generalization of Source Code Models</a><br><a href="https://arxiv.org/pdf/2302.00438.pdf">On the Robustness of Code Generation Techniques: An Empirical Study on GitHub Copilot</a></p><p>Use case：<br><a href="https://python.langchain.com/docs/use_cases/code_understanding">Code understanding | 🦜️🔗 Langchain</a><br><a href="https://python.langchain.com/docs/use_cases/extraction">Extraction | 🦜️🔗 Langchain</a><br><a href="https://python.langchain.com/docs/use_cases/qa_structured/sql">SQL | 🦜️🔗 Langchain</a></p><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">chatchat-space&#x2F;Langchain-Chatchat: Langchain-Chatchat（原Langchain-ChatGLM）基于 Langchain 与 ChatGLM 等语言模型的本地知识库问答 | Langchain-Chatchat (formerly langchain-ChatGLM), local knowledge based LLM (like ChatGLM) QA app with langchain (github.com)</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 大模型 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MIT6.824</title>
       <link href="/posts/1906f3d9/"/>
       <url>/posts/1906f3d9/</url>
       
-        <content type="html"><![CDATA[<h1 id="Lecture01-Introduce"><a href="#Lecture01-Introduce" class="headerlink" title="Lecture01 - Introduce"></a>Lecture01 - Introduce</h1><h2 id="MapReduce论文"><a href="#MapReduce论文" class="headerlink" title="MapReduce论文"></a>MapReduce论文</h2><p><img src="/../../../img/Pasted%20image%2020230929130402.png"></p><p>过程：</p><ul><li>将用户输入的文件分成M块，每块大小为16MB-64MB（可由用户指定）。</li><li>由Master节点分配工作给其他Worker节点，包括M个map任务和R个reduce任务。</li><li>被分配了map任务的节点解析数据，生成&lt;key,value&gt;然后放入内存缓冲区。</li><li>被缓冲的键值对周期性地写入磁盘，然后被划分为R个块（Hash(key) mod R），他们在磁盘上的位置被发送给Master,然后Master转发给Worker节点进行reduce任务。</li><li>当节点收到master关于这些位置的通知时，他会使用RPC读取磁盘中的数据，当读取完所有中间数据时，进行排序操作来保证相同的键组合在一起。</li><li>Reduce函数对已排序的中间数据进行迭代，其输出附加到Reduce分区的output文件中。</li><li>当所有map和reduce任务运行完毕后，返回至用户代码，整个过程结束。</li></ul><h1 id="Lab-1-MapReduce"><a href="#Lab-1-MapReduce" class="headerlink" title="Lab 1 - MapReduce"></a>Lab 1 - MapReduce</h1>]]></content>
+        <content type="html"><![CDATA[<p><img src="/../../../img/Pasted%20image%2020231009101529.png"></p><h1 id="Lecture01-Introduce"><a href="#Lecture01-Introduce" class="headerlink" title="Lecture01 - Introduce"></a>Lecture01 - Introduce</h1><h2 id="MapReduce论文"><a href="#MapReduce论文" class="headerlink" title="MapReduce论文"></a>MapReduce论文</h2><p><img src="/../../../img/Pasted%20image%2020230929130402.png"></p><p>过程：</p><ul><li>将用户输入的文件分成<code>M块</code>，每块大小为16MB-64MB（可由用户指定）。</li><li>由Master节点分配工作给其他Worker节点，包括<code>M个map任务</code>和<code>R个reduce任务</code>。</li><li>被分配了map任务的节点解析数据，生成&lt;key,value&gt;然后放入<code>内存缓冲区</code>。</li><li>被缓冲的键值对周期性地写入磁盘，然后被划分为<code>R个块（Hash(key) mod R）</code>，他们在磁盘上的位置被发送给Master,然后Master转发给Worker节点进行reduce任务。</li><li>当节点收到master关于这些位置的通知时，他会使用RPC读取磁盘中的数据，当读取完所有中间数据时，进行<code>排序</code>操作来保证相同的键组合在一起。</li><li>Reduce函数对已排序的中间数据进行迭代，其输出附加到Reduce分区的output文件中。</li><li>当<code>M个map</code>和<code>R个reduce</code>任务运行完毕后，返回至用户代码，整个过程结束。</li></ul><p>数据结构</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Task:</span><br><span class="line">taskId:</span><br><span class="line">type:map/reduce</span><br><span class="line">state:idle/in-progress/completed</span><br><span class="line">machineId:</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="Lab-1-MapReduce"><a href="#Lab-1-MapReduce" class="headerlink" title="Lab 1 - MapReduce"></a>Lab 1 - MapReduce</h1><h1 id="Lecture02-Infrastructure-RPC-and-threads"><a href="#Lecture02-Infrastructure-RPC-and-threads" class="headerlink" title="Lecture02 - Infrastructure: RPC and threads"></a>Lecture02 - Infrastructure: RPC and threads</h1><p>Why Go?</p><ul><li>强大的多线程</li><li>便捷的RPC</li><li>类型安全</li><li>内存安全（垃圾回收机制）</li><li>简单</li></ul><p>Why threads?</p><ul><li>并发在分布式系统中的必要性</li><li>利用CPU的多核性能</li><li>便利性</li><li>I&#x2F;O并发</li></ul><p>挑战性：</p><ul><li>共享数据：加锁（sync.Mutex或避免共享可变数据）</li><li>线程之间的协调</li><li>死锁：锁机制或通信</li></ul><p>Go语言并发编程<br><a href="https://blog.csdn.net/weixin_45765795/article/details/121185893">【并发编程】WaitGroup 基本用法和如何实现以及常见错误-CSDN博客</a></p><h1 id="Lecture03-GFS"><a href="#Lecture03-GFS" class="headerlink" title="Lecture03 - GFS"></a>Lecture03 - GFS</h1><h2 id="GFS论文"><a href="#GFS论文" class="headerlink" title="GFS论文"></a>GFS论文</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>用于大型分布式数据密集型应用的可伸缩分布式文件系统。</p><ul><li>组件的失败和错误是非常常见的。因此持续的监控，错误检测，容错和自动恢复是必须的</li><li>文件通常是巨大的，需要重新设计I&#x2F;O操作和块大小。</li><li>文件访问模式，顺序访问。需要优化追加写入和原子性。</li><li>放宽一致性和原子追加操作</li></ul><h3 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h3><p><img src="/../../../img/Pasted%20image%2020231009195026.png"></p><ul><li>一个GFS集群由一个master和多个分块服务器（chunkserver）组成</li><li>文件以固定大小的块存储，块由全局唯一的64位ID标识，默认情况下每个区块具有三个副本。</li><li>master存储所有文件的元信息，包括名称空间、访问控制信息、文件到块的映射以及块的当前位置。</li><li>master定期使用心跳信息与块交流，提供指令和收集状态。</li><li>链接到每个应用程序中的GFS客户端代码实现文件系统API，并与主服务器和分块服务器通信，以代表应用程序读取或写入数据。</li><li>客户端和分块服务器不缓存文件数据。</li><li>客户端会询问master该和哪个分块服务器交互，然后直接与分块服务器读取和写入数据。</li></ul><p>交互过程：</p><ol><li>客户端通过指定的文件名和字节偏移量转化为<code>(file name,chunk index)</code>，并发送给master。</li><li>master回复相应的区块句柄和区块位置。</li><li>客户端在一定时间内缓存<code>(file name,chunk index)</code>，一便后续使用</li><li>客户端向其中的一个副本（距离最近优先）发送<code>(chunk handle,byte range)</code>请求。</li><li>在缓存有效期内，对同一块的访问不需重复请求master。</li></ol><p>master存储的元信息（位于master的内存中）：</p><ul><li>文件和块命名空间</li><li>文件到块映射信息</li><li>每个块副本的位置信息</li></ul><p>前两种还会以操作日志并保存到远程计算机上来避免master发生崩溃和不一致。每个块的信息则不会持久存储。</p>]]></content>
       
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+          <category> 微服务和分布式 </category>
+          
+      </categories>
       
       
         <tags>
@@ -31,8 +79,14 @@
       <link href="/posts/806cd970/"/>
       <url>/posts/806cd970/</url>
       
-        <content type="html"><![CDATA[<h1 id="1-引论"><a href="#1-引论" class="headerlink" title="1.引论"></a>1.引论</h1><h1 id="2-线性代数方程组的直接解法"><a href="#2-线性代数方程组的直接解法" class="headerlink" title="2.线性代数方程组的直接解法"></a>2.线性代数方程组的直接解法</h1><h2 id="2-2Gauss消去法"><a href="#2-2Gauss消去法" class="headerlink" title="2.2Gauss消去法"></a>2.2Gauss消去法</h2>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-引论"><a href="#1-引论" class="headerlink" title="1.引论"></a>1.引论</h1><h1 id="2-线性代数方程组的直接解法"><a href="#2-线性代数方程组的直接解法" class="headerlink" title="2.线性代数方程组的直接解法"></a>2.线性代数方程组的直接解法</h1><h2 id="2-2Gauss消去法"><a href="#2-2Gauss消去法" class="headerlink" title="2.2Gauss消去法"></a>2.2Gauss消去法</h2><h1 id="向量范数"><a href="#向量范数" class="headerlink" title="向量范数"></a>向量范数</h1><p><img src="/../../img/Pasted%20image%2020231010081042.png"></p><p>矩阵范数<br><img src="/../../img/Pasted%20image%2020231010081226.png"></p><p><img src="/../../img/Pasted%20image%2020231010081741.png"></p><p>谱半径是其对应矩阵的特征值中最大的特征值绝对值</p><p><img src="/../../img/Pasted%20image%2020231010082408.png"></p><p><img src="/../../img/Pasted%20image%2020231010082441.png"></p><p><img src="/../../img/Pasted%20image%2020231010084154.png"></p><p>如何证明：<br>1）A的某一行和该行对应的代数余子式相乘在相加后结果为该行列式的值<br>2）A的某一行和另一行元素的代数余子式相乘在相加后结果为0（相当于两行相同的行列式展开）</p><p><img src="/../../img/Pasted%20image%2020231010084740.png"></p><p><img src="/../../img/Pasted%20image%2020231010084923.png"></p><p><a href="https://zhuanlan.zhihu.com/p/387907406">线性方程组-迭代法 0.1：范数与谱半径 - 知乎 (zhihu.com)</a></p><p><img src="/../../img/Pasted%20image%2020231010091617.png"><br><img src="/../../img/Pasted%20image%2020231010091631.png"></p>]]></content>
       
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
       
       
         <tags>

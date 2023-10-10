@@ -11,6 +11,12 @@
         <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>背景：我们在让大模型帮我们生成代码的时候，不同的需求描述对于模型生成的代码影响有多大。换个描述很可能会生成完全不同的结果。</p><p>研究目的：对于代码生成模型（以Github Copilot为例），不同但语义等效的自然语言描述是否会产生相同的推荐功能（代码）。</p><p>测试方法：892个Java methods来自1401个开源项目，将方法上方的注释作为输入给模型</p><p>生成释义的自动化工具：PEGASUS and TP</p><p>原始释义-一组语义等效的释义描述（使用PEGASUS and TP生成）</p><p>解释一下自动释义技术</p><ul><li><p>PEGASUS</p></li><li><p>TP</p></li></ul><h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>问题：</p><ul><li>RQ0:自动释义技术可以在多大程度上用于测试基于深度学习的代码生成器的鲁棒性？</li><li>RQ1:GitHub Copilot 的输出在多大程度上受到开发人员作为输入提供的代码描述的影响？</li></ul><p>&lt;method,code_description&gt;</p><p>892个方法：<br><img src="/../../img/Pasted%20image%2020231008222237.png"><br>TP：只生成792个有效释义，其中非等效占比<br>PEGASUS：生成891个有效释义，其中非等效占比<br>手工：认为全部有效，且等效892</p><p>一共：792+891+892&#x3D;2575   原始释义892 共2575+892&#x3D;3467，两个上下文场景* 2&#x3D;6934次调用</p><h1 id="研究结果"><a href="#研究结果" class="headerlink" title="研究结果"></a>研究结果</h1><p>RQ0:</p><p>RQ1:</p><h1 id="局限性："><a href="#局限性：" class="headerlink" title="局限性："></a>局限性：</h1><ul><li>通过测试未必意味着生成代码的正确，使用CodeBLEU和编辑距离</li><li>自动化模拟脚本不能够完全代替模型对于开发者的帮助，开发人员也许会参考模型生成的结果后，灵活变通。</li><li>在判断语义等效性时，作者的主观性</li><li>892个数据集中可能部分已经被用于训练copilot，导致结果的不准确</li><li>仅考虑了Java语言</li></ul><h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ul><li>46%情况下，不同但语义相同的描述会导致生成代码的不同。</li><li>目前代码生成模型效果一般，仅有13%的生成代码能够通过测试，但作者说了（一部分原因是选取的待生成方法比较复杂，见图，圈复杂度等）</li><li>要让模型输出正确的代码，必须使用语义等效的描述之一（不好把控，评价指标没说）</li><li>提高开发者对代码的描述准确性</li><li>对DWF来说，如果内嵌AI助手，更需要用户能够准确的提供他们的需求&#x2F;描述以获得期望的结果。</li><li>最佳实践：可以尝试输入给模型多种不同但意思相近的描述，对比生成的结果，选最佳的</li></ul>]]></content>
       
       
+      <categories>
+          
+          <category> 大模型 </category>
+          
+      </categories>
+      
       
         <tags>
             
@@ -31,6 +37,12 @@
       
         <content type="html"><![CDATA[<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p>JS版：<a href="https://github.com/langchain-ai/langchainjs">langchain-ai&#x2F;langchainjs (github.com)</a><br>Python版：<a href="https://github.com/langchain-ai/langchain">langchain-ai&#x2F;langchain: ⚡ Building applications with LLMs through composability ⚡ (github.com)</a></p><p>论文链接：<br><a href="https://arxiv.org/pdf/2205.10583.pdf">Automated Repair of Programs from Large Language Models</a><br><a href="https://arxiv.org/pdf/2210.14179.pdf">Practical Program Repair in the Era of Large Pre-trained Language Models</a><br><a href="https://arxiv.org/pdf/2302.06144v2.pdf">SKCODER: A Sketch-based Approach for Automatic Code Generation</a><br><a href="https://arxiv.org/pdf/2302.03482.pdf">Keeping Pace with Ever-Increasing Data: Towards Continual Learning of Code Intelligence Models</a><br><a href="https://arxiv.org/pdf/2302.05020.pdf">Impact of Code Language Models on Automated Program Repair</a><br>[An Empirical Study of Pre-Trained Model Reuse in the Hugging Face Deep Learning Model Registry](<a href="https://arxiv.org/pdf/2303.02552.pdf">https://arxiv.org/pdf/2303.02552.pdf</a><br><a href="https://arxiv.org/pdf/2302.04030.pdf">CrossCodeBench: Benchmarking Cross-Task Generalization of Source Code Models</a><br><a href="https://arxiv.org/pdf/2302.00438.pdf">On the Robustness of Code Generation Techniques: An Empirical Study on GitHub Copilot</a></p><p>Use case：<br><a href="https://python.langchain.com/docs/use_cases/code_understanding">Code understanding | 🦜️🔗 Langchain</a><br><a href="https://python.langchain.com/docs/use_cases/extraction">Extraction | 🦜️🔗 Langchain</a><br><a href="https://python.langchain.com/docs/use_cases/qa_structured/sql">SQL | 🦜️🔗 Langchain</a></p><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">chatchat-space&#x2F;Langchain-Chatchat: Langchain-Chatchat（原Langchain-ChatGLM）基于 Langchain 与 ChatGLM 等语言模型的本地知识库问答 | Langchain-Chatchat (formerly langchain-ChatGLM), local knowledge based LLM (like ChatGLM) QA app with langchain (github.com)</a></p>]]></content>
       
+      
+      <categories>
+          
+          <category> 大模型 </category>
+          
+      </categories>
       
       
         <tags>

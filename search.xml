@@ -11,6 +11,12 @@
         <content type="html"><![CDATA[<p>t-SNE</p><h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h1><p>t-SNE（t-distributed Stochastic Neighbor Embedding）是一种无监督的非线性降维技术，用于数据探索和高维数据的可视化。非线性降维意味着该算法允许我们分离无法用直线分离的数据。</p><p>how to work<br>t-SNE 算法在高维空间和低维空间中找到实例对之间的相似度量。然后，它尝试优化两个相似度量。整个过程分为三个步骤。</p><ol><li>t-SNE 模拟一个点被选为另一个点在高维和低维空间的邻居。它首先使用高斯核计算高维空间中所有数据点之间的成对相似度。相距较远的点被选中的概率低于相距较近的点</li><li>然后，该算法尝试将高维数据点映射到低维空间，同时保留成对的相似性。</li><li>它是通过最小化原始高维和低维概率分布之间的发散来实现的。该算法使用梯度下降法使发散最小化。低维嵌入被优化到稳定状态。</li></ol>]]></content>
       
       
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
+      
       
         <tags>
             
@@ -31,6 +37,12 @@
       
         <content type="html"><![CDATA[<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>现代软件系统正变得越来越复杂，依赖于大量的第三方库支持。因此，库行为是软件行为不可分割的一部分。分析它们和分析软件本身一样重要。<strong>然而，由于缺乏源代码、不同语言的实现以及复杂的优化，分析库具有很大的挑战性。</strong> 我们注意到，许多Java库函数都提供了出色的文档，这些文档简要地描述了函数的功能。我们开发了一种新的技术，可以通过分析文档来构建Java API函数的模型。与原始模型相比，这些模型在Java中的实现更简单，因此更易于分析。更重要的是，它们提供了与原始功能相同的功能。我们的技术成功地对14个广泛使用的Java类中的326个函数进行了建模。我们还将这些模型用于Android应用程序的静态污染分析和Java程序的动态切片，展示了我们模型的有效性和效率。</p><p>难点</p><ul><li>库源代码的隐蔽性&#x2F;多样性，导致难以对软件行为进行分析</li><li>源代码庞大，复杂，包含大量多层次的调用关系，导致分析困难</li><li>源代码包含大量优化和工程技巧，不利于对其行为分析（难以理解）</li><li>库具有跨平台支持</li></ul><p>本文提出了一种在自然语言中从Javadoc生成模型的新方法。这些模型是代码片段，具有与原始实现相同的功能，但复杂性要简单得多。它们可以在软件分析过程中替换原始库函数。<br>就是<strong>在软件分析中，使用通过JavaDoc生成的方法代替库函数，来简化分析</strong></p><p><img src="/../../img/Pasted%20image%2020231119150852.png"><br>一个很简单的ArrayList的add方法包括了三个函数调用，其中一个是使用JNI在本机代码中实现，无法直接访问。</p><p><img src="/../../img/Pasted%20image%2020231119154353.png"></p><p>总结<br>基于将自然语言处理技术和程序分析技术应用于模型库的思想，我们识别并克服了将NLP技术应用于真实代码生成的挑战，并构建了一个建模工具的原型，该工具可以从Javadocs中自动生成Java容器类库的简化代码。平均而言，生成的模型的大小只有原始代码库的三分之一。我们还应用我们的技术来帮助其他需要推理软件运行时环境的程序分析。结果表明，我们的模型可以帮助静态和动态分析。</p><h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>构件</p><ul><li>Pre-processor：预处理器接受Javadoc解析器提取的描述，并执行三种分析。<ul><li>等价性分析：预处理器根据领域词典将单词分类到预定义的语义类中。减少IR的映射量。</li><li>冗余信息消除：删除描述中的同义句&#x2F;解释句。如“换言之，即”后面的句子。</li><li>句子增强：为javadoc中的句子做增强或填充。如填充return&#x2F;throw等关键词。</li></ul></li><li>文本分析引擎：文本分析引擎通过自然语言处理为每个预处理的句子生成语法树结构。<ul><li>添加POS词性限制组件，解决Stanford parser中的词性分类错误，强制它对一些编程特定的单词使用我们预定义的标签。</li><li>名词true&#x2F;false&#x2F;null</li><li>动词returns&#x2F;sets&#x2F;maps&#x2F;copies</li><li>形容词reverse&#x2F;next&#x2F;more&#x2F;empty</li></ul></li><li>树状转换器：树转换器转换Standford parser生成的原始树结构，以生成不同的变体。每个变体对应句子的不同解释。这些多个变体最终会被模型验证器验证，来过滤掉不正确的模型。<ul><li>不幸的是，即使k很大，解析器也无法保证为句子生成具有预期含义的树。为了避免这种情况（浪费大量的计算）提出了算法1，通过仅重新定位连接节点来转换来自斯坦福解析器的解析树，以产生一组变体。</li><li>算法1：lift up and push down产生不同的变体，直至没有新的变体产生。</li></ul></li><li>中间表示生成器（IR generator）：中间表示生成器根据编程领域知识，通过替换子树、识别参数和添加标签，操纵树转换器生成的树来构造IR。主要执行如下两个任务：<ul><li>参数识别：识别定义在方法描述中的参数，算法2</li><li>结构识别：识别方法描述中指示的程序结构。<ul><li>循环：添加<code>loop</code>标签</li><li>条件：if、when、otherwise</li></ul></li></ul></li><li>模型生成器（Model Generator）：基于IRs生成模型。基元</li><li>模型验证器（Model Validator）：由于自然语言的模糊性和当前NLP工具的限制，我们的方法可以生成多个候选模型。模型验证器用来过滤那些与原来库行为不一致的那些模型。使用<code>Randoop</code>方法生成测试。</li></ul><h1 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h1><p>评估的方面：</p><ul><li>模型生成技术的有效性。</li><li>在其他分析中使用生成的模型。</li></ul><h2 id="模型生成的有效性"><a href="#模型生成的有效性" class="headerlink" title="模型生成的有效性"></a>模型生成的有效性</h2><p><img src="/../../img/Pasted%20image%2020231120154943.png"></p><ul><li><code>#T</code>：原始JDK类的方法总数</li><li><code>#M</code>：工具可以成功建模的数量</li><li><code>%</code>：<code>#T</code>&#x2F;<code>#M</code></li><li><code>#C</code>：每个类候选模型的数量</li><li><code>GT</code>：生成类候选模型的总时间</li><li><code>VT</code>：使用Randoop验证类模型所用的时间</li><li><code>#CN</code>：使用Randoop生成测试用例的平均数量</li></ul><ol><li>代码行对比原始JDK减少1-13倍</li></ol><h2 id="静态污染分析"><a href="#静态污染分析" class="headerlink" title="静态污染分析"></a>静态污染分析</h2><p>我们首先使用原始JDK源代码运行分析，然后用我们的模型替换JDK的一部分，然后比较报告的信息泄漏警告的数量和性能。<br><img src="/../../img/Pasted%20image%2020231120160846.png"></p><h2 id="动态切片分析"><a href="#动态切片分析" class="headerlink" title="动态切片分析"></a>动态切片分析</h2><p><img src="/../../img/Pasted%20image%2020231120161200.png"></p><h1 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h1><ul><li>效果很大程度取决于文档的质量。</li><li>依赖基元模式，但来源于javadoc，不具有普适性。</li><li>聚焦于容器类库</li><li>测试用例不够充分，使用更严格的验证技术（等价性检查）</li></ul>]]></content>
       
+      
+      <categories>
+          
+          <category> 课程 </category>
+          
+      </categories>
       
       
         <tags>

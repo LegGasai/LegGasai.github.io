@@ -1,0 +1,396 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LegGasai's CSLearning</title><meta name="author" content="LegGasai"><meta name="copyright" content="LegGasai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="CS learning">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LegGasai&#39;s CSLearning">
+<meta property="og:url" content="https://leggasai.github.io/page/3/index.html">
+<meta property="og:site_name" content="LegGasai&#39;s CSLearning">
+<meta property="og:description" content="CS learning">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leggasai.github.io/img/avatar.PNG">
+<meta property="article:author" content="LegGasai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leggasai.github.io/img/avatar.PNG"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leggasai.github.io/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LegGasai\'s CSLearning',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-01-29 20:13:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="LegGasai's CSLearning"><span class="site-name">LegGasai's CSLearning</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">LegGasai's CSLearning</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/LegGasai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jyc132780208@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_56522574" target="_blank" title="'#hdhfbb'"><i class="fa-solid fa-blog"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/98da000b/" title="On the Robustness of Code Generation Techniques:An Empirical Study on GitHub Copilot">On the Robustness of Code Generation Techniques:An Empirical Study on GitHub Copilot</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-08T13:43:12.000Z" title="发表于 2023-10-08 21:43:12">2023-10-08</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-22T09:14:22.514Z" title="更新于 2023-12-22 17:14:22">2023-12-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E8%AE%BA%E6%96%87/">论文</a></span></div><div class="content">介绍背景：我们在让大模型帮我们生成代码的时候，不同的需求描述对于模型生成的代码影响有多大。换个描述很可能会生成完全不同的结果。
+研究目的：对于代码生成模型（以Github Copilot为例），不同但语义等效的自然语言描述是否会产生相同的推荐功能（代码）。
+测试方法：892个Java methods来自1401个开源项目，将方法上方的注释作为输入给模型
+生成释义的自动化工具：PEGASUS and TP
+原始释义-一组语义等效的释义描述（使用PEGASUS and TP生成）
+解释一下自动释义技术
+
+PEGASUS
+
+TP
+
+
+方法问题：
+
+RQ0:自动释义技术可以在多大程度上用于测试基于深度学习的代码生成器的鲁棒性？
+RQ1:GitHub Copilot 的输出在多大程度上受到开发人员作为输入提供的代码描述的影响？
+
+&lt;method,code_description&gt;
+892个方法：TP：只生成792个有效释义，其中非等效占比PEGASUS：生成891个有效释义，其中非等效占比手工：认为全部有效，且等效892
+一共：792+891+892&#x3D;2575   原始释义 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/887510fe/" title="Lang Chain介绍">Lang Chain介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-06T12:56:28.000Z" title="发表于 2023-10-06 20:56:28">2023-10-06</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-20T13:25:09.757Z" title="更新于 2023-11-20 21:25:09">2023-11-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span></div><div class="content">快速开始JS版：langchain-ai&#x2F;langchainjs (github.com)Python版：langchain-ai&#x2F;langchain: ⚡ Building applications with LLMs through composability ⚡ (github.com)
+论文链接：Automated Repair of Programs from Large Language ModelsPractical Program Repair in the Era of Large Pre-trained Language ModelsSKCODER: A Sketch-based Approach for Automatic Code GenerationKeeping Pace with Ever-Increasing Data: Towards Continual Learning of Code Intelligence Models
+Impact of Code Language Models on Automated Program R ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1906f3d9/" title="MIT6.824">MIT6.824</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-29T04:53:27.000Z" title="发表于 2023-09-29 12:53:27">2023-09-29</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-29T12:13:15.359Z" title="更新于 2024-01-29 20:13:15">2024-01-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">微服务和分布式</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E8%AF%BE%E7%A8%8B/">课程</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></span></div><div class="content">思维导图
+Lecture01 - IntroduceMapReduce论文
+过程：
+
+将用户输入的文件分成M块，每块大小为16MB-64MB（可由用户指定）。
+由Master节点分配工作给其他Worker节点，包括M个map任务和R个reduce任务。
+被分配了map任务的节点解析数据，生成&lt;key,value&gt;然后放入内存缓冲区。
+被缓冲的键值对周期性地写入磁盘，然后被划分为R个块（Hash(key) mod R），他们在磁盘上的位置被发送给Master,然后Master转发给Worker节点进行reduce任务。
+当节点收到master关于这些位置的通知时，他会使用RPC读取磁盘中的数据，当读取完所有中间数据时，进行排序操作来保证相同的键组合在一起。
+Reduce函数对已排序的中间数据进行迭代，其输出附加到Reduce分区的output文件中。
+当M个map和R个reduce任务运行完毕后，返回至用户代码，整个过程结束。
+
+数据结构
+123456Task:	taskId:	type:map/reduce	state:idle/in-progress/completed	 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/806cd970/" title="工程硕士数学">工程硕士数学</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-26T04:40:55.000Z" title="发表于 2023-09-26 12:40:55">2023-09-26</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-06T14:12:47.200Z" title="更新于 2024-01-06 22:12:47">2024-01-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AF%BE%E7%A8%8B/">课程</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E8%AF%BE%E7%A8%8B/">课程</a></span></div><div class="content">1.引论正交矩阵
+2.线性代数方程组的直接解法2.2Gauss消去法2.3三角分解
+2.3.1直接三角分解适用于所有情况
+
+规律：下三角阵L第一列和A第一列一致，上三角阵U第一行和A第一行一致
+
+2.3.2追赶法只适用于三对角矩阵
+2.4列主元消去法
+是对Gauss消去法的优化，每次从待消元的所有行中的指定列中选出绝对值最大的作为主元
+
+
+2.5对称正定矩阵2.5.1对称正定矩阵的三角分解更特别的（平方根法）证明：
+向量范数常用向量范数
+矩阵范数
+算子范数
+
+可以看成矩阵A作用在全部向量上产生的效果的比例最大的那个值，即为||A||
+
+
+谱半径是其对应矩阵的特征值中最大的特征值绝对值
+
+
+条件数与所选择的范数有关,不同范数计算的条件数不同
+
+
+
+如何证明：1）A的某一行和该行对应的代数余子式相乘在相加后结果为该行列式的值2）A的某一行和另一行元素的代数余子式相乘在相加后结果为0（相当于两行相同的行列式展开）
+
+
+线性方程组-迭代法 0.1：范数与谱半径 - 知乎 (zhihu.com)
+$(1)Cond(A)≥1$$(2)若A是正交矩阵 A^TA&#x3D;I,那么Cond(A)_2& ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/26e99575/" title="Hexo+github+Obsidian搭建个人博客平台">Hexo+github+Obsidian搭建个人博客平台</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-24T07:52:03.000Z" title="发表于 2023-09-24 15:52:03">2023-09-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-24T09:36:56.645Z" title="更新于 2023-09-24 17:36:56">2023-09-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/">博客平台</a></span></div><div class="content">
+由于本地使用obsidian对笔记进行编辑和分类时，多端同步繁琐，无法在线查看。因此选用Hexo博客框架+Github建站，搭建一个自己的个人博客页面，同时通过配置Obsidian,使得在本地也可以使用Obsidian进行管理和笔记的编辑。
+
+
+(其实是羡慕别人炫酷的个人博客×)😄😄
+
+效果博客链接：LegGasai’s CSLearning
+一.新建Github仓库1.创建同名仓库
+注意图中Repository name必须为Owner.github.io，这样github才能正确识别为github pages
+
+二.创建Hexo项目
+Hexo是一个快速、简洁且高效的博客框架，且开源社区提供了大量的第三方主题样式，可一键生成华丽的个人博客网页。官网链接Hexo
+
+1.安装Hexo
+确保已经安装了如下工具
+
+
+Node.js (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)
+Git
+
+然后通过npm安装Hexo脚手架
+1$ npm install -g hexo-cli
+
+安装完成后，建站（创建Hexo项目）,将&lt;folder&g ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/dd2fb3f1/" title="谷粒商城笔记">谷粒商城笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-24T06:00:21.000Z" title="发表于 2023-09-24 14:00:21">2023-09-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-06T12:19:57.433Z" title="更新于 2023-10-06 20:19:57">2023-10-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Project/">Project</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Project/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/">谷粒商城</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a></span></div><div class="content">1.初始化项目idea新建空项目添加各个模块
+gulimall-product商品服务gulimall-ware仓储服务gulimall-order订单服务同理创建gulimall-coupon优惠券服务gulimall-member会员服务同时添加springboot web依赖和springcloud-routing openfeign依赖
+
+聚合模块
+在根目录下添加pom文件，添加下列代码
+
+123456789101112131415161718&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/c1c1f0d5/" title="凤凰架构笔记">凤凰架构笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-24T05:06:21.000Z" title="发表于 2023-09-24 13:06:21">2023-09-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-29T04:39:14.901Z" title="更新于 2023-09-29 12:39:14">2023-09-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">微服务和分布式</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/">软件架构</a></span></div><div class="content">1.架构师的视角本地事务
+A（atomicity原子性）：在同一项业务处理过程中，事务保证了对多个数据的修改，要么同时成功，要么同时被撤销。
+C（consistency一致性)：事务必须是使数据库从一个一致性状态变到另一个一致性状态。
+I （isolation隔离性）：在不同的业务处理过程中，事务保证了各自业务正在读、写的数据互相独立，不会彼此影响。
+D（durability持久性)：事务应当保证所有成功被提交的数据修改都能够正确地被持久化，不丢失数据。
+
+
+原子性、隔离性、持久性都是为一致性服务的
+
+如何保证原子性和持久性
+发生崩溃的情况
+
+
+未提交事务，写入后崩溃：程序还没修改完三个数据，但数据库已经将其中一个或两个数据的变动写入磁盘，此时出现崩溃，一旦重启之后，数据库必须要有办法得知崩溃前发生过一次不完整的购物操作，将已经修改过的数据从磁盘中恢复成没有改过的样子，以保证原子性。(undo log)
+已提交事务，写入前崩溃：程序已经修改完三个数据，但数据库还未将全部三个数据的变动都写入到磁盘，此时出现崩溃，一旦重启之后，数据库必须要有办法得知崩溃前发生过一次完整的购物操作，将还没来 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/feaf56e8/" title="Vite">Vite</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-24T02:06:02.081Z" title="发表于 2023-09-24 10:06:02">2023-09-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-24T06:32:46.552Z" title="更新于 2023-09-24 14:32:46">2023-09-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/Vue/">Vue</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/Vue/Vue3/">Vue3</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/">构建工具</a></span></div><div class="content">1.简介
+Vite是一种新型前端构建工具(类似webpack)，能够显著提升前端开发体验。它主要由两部分组成：
+
+
+一个开发服务器，它基于 原生 ES 模块 提供了 丰富的内建功能，如速度快到惊人的 模块热更新（HMR）。
+一套构建指令，它使用 Rollup 打包你的代码，并且它是预配置的，可输出用于生产环境的高度优化过的静态资源。
+
+搭建第一个Vite项目12345678npm create vite@latestnpm create vite@latest my-vue-app -- --template &lt;template_name&gt;yarn create viteyarn create vite my-vue-app --template &lt;template_name&gt;#template_name可以是vanilla，vanilla-ts, vue, vue-ts，react，react-ts，react-swc，react-swc-ts，preact，preact-ts，lit，lit-ts，svelte，svelte-ts，solid，solid-t ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/4a17b156/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-23T11:40:04.162Z" title="发表于 2023-09-23 19:40:04">2023-09-23</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-24T06:32:46.540Z" title="更新于 2023-09-24 14:32:46">2023-09-24</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
+
+More info: Writing
+Run server1$ hexo server
+
+More info: Server
+Generate static files1$ hexo generate
+
+More info: Generating
+Deploy to remote sites1$ hexo deploy
+
+More info: Deployment
+12345678910111213141516171819202122232425262728293031323 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/69e6bbe1/" title="RocketMQ">RocketMQ</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-18T07:56:27.000Z" title="发表于 2023-09-18 15:56:27">2023-09-18</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-24T06:32:46.548Z" title="更新于 2023-09-24 14:32:46">2023-09-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/RocketMQ/">RocketMQ</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></span></div><div class="content">1.元素概念
+通信方式
+分布式系统架构思想下，将复杂系统拆分为多个独立的子模块，例如微服务模块。此时就需要考虑子模块间的远程通信，典型的通信模式分为以下两种，一种是同步的RPC远程调用；一种是基于中间件代理的异步通信方式。
+
+同步RPC调用模型
+
+同步RPC调用模型下，不同系统之间直接进行调用通信，每个请求直接从调用方发送到被调用方，然后要求被调用方立即返回响应结果给调用方，以确定本次调用结果是否成功。 注意 此处的同步并不代表RPC的编程接口方式，RPC也可以有异步非阻塞调用的编程方式，但本质上仍然是需要在指定时间内得到目标端的直接响应
+
+异步通信模型
+
+异步消息通信模式下，各子系统之间无需强耦合直接连接，调用方只需要将请求转化成异步事件（消息）发送给中间代理，发送成功即可认为该异步链路调用完成，剩下的工作中间代理会负责将事件可靠通知到下游的调用系统，确保任务执行完成。该中间代理一般就是消息中间件。
+
+
+异步通信的优势如下：
+
+
+系统拓扑简单。由于调用方和被调用方统一和中间代理通信，系统是星型结构，易于维护和管理。
+
+上下游耦合性弱。上下游系统之间弱耦合，结构更灵活，由中间代理负责缓 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LegGasai</div><div class="author-info__description">作者描述</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LegGasai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LegGasai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jyc132780208@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_56522574" target="_blank" title="'#hdhfbb'"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog☺</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/0/" title="无题">无题</a><time datetime="2024-01-29T12:13:15.351Z" title="发表于 2024-01-29 20:13:15">2024-01-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/7700681/" title="MIT6.830">MIT6.830</a><time datetime="2024-01-29T11:50:38.000Z" title="发表于 2024-01-29 19:50:38">2024-01-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/7700681/" title="MIT6.830">MIT6.830</a><time datetime="2024-01-25T14:11:32.000Z" title="发表于 2024-01-25 22:11:32">2024-01-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/906041f/" title="SchemaN">SchemaN</a><time datetime="2024-01-19T02:22:02.000Z" title="发表于 2024-01-19 10:22:02">2024-01-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/51e51a3e/" title="CMU 15-445">CMU 15-445</a><time datetime="2024-01-17T13:39:32.000Z" title="发表于 2024-01-17 21:39:32">2024-01-17</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B6%E4%BB%96/"><span class="card-category-list-name">其他</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">4</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Vue/"><span class="card-category-list-name">Vue</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Vue/Vue3/"><span class="card-category-list-name">Vue3</span><span class="card-category-list-count">3</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="card-category-list-name">后端</span><span class="card-category-list-count">14</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/Project/"><span class="card-category-list-name">Project</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/Project/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/"><span class="card-category-list-name">谷粒商城</span><span class="card-category-list-count">1</span></a></li></ul></li></ul></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 1.26em; color: #999fa8">大模型</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 1.1em; color: #999">中间件</a> <a href="/tags/Vue/" style="font-size: 1.18em; color: #999ca1">Vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.18em; color: #999ca1">前端</a> <a href="/tags/SpringBoot/" style="font-size: 1.1em; color: #999">SpringBoot</a> <a href="/tags/%E8%AF%BE%E7%A8%8B/" style="font-size: 1.42em; color: #99a6b7">课程</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.18em; color: #999ca1">项目</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.1em; color: #999">数据结构</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 1.26em; color: #999fa8">论文</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/" style="font-size: 1.1em; color: #999">软件架构</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 1.18em; color: #999ca1">微服务</a> <a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 1.18em; color: #999ca1">可视化</a> <a href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">构建工具</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.18em; color: #999ca1">算法</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1.42em; color: #99a6b7">分布式</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0/" style="font-size: 1.1em; color: #999">博客平台</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 1.5em; color: #99a9bf">后端</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 1.1em; color: #999">消息队列</a> <a href="/tags/obsidian/" style="font-size: 1.1em; color: #999">obsidian</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.34em; color: #99a3b0">数据库</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">12</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">34</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">110.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-01-29T12:13:57.221Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/footer.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By LegGasai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('https://waline-vercel-aspa.vercel.app/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

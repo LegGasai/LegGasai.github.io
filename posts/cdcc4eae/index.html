@@ -1,0 +1,392 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>分布式事务 | LegGasai's CSLearning</title><meta name="author" content="LegGasai"><meta name="copyright" content="LegGasai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="简介分布式事务是指事务的参与者、支持事务的服务器、资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上。在分布式系统中，可能涉及到多个参与者，每个参与者负责管理自己的本地数据。分布式事务的目标是确保在整个分布式环境中，所有相关的操作要么全部成功，要么全部失败，以保持数据的一致性。（All or nothing）  基本理论CAP理论CAP是 Consistency、Availabilit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式事务">
+<meta property="og:url" content="https://leggasai.github.io/posts/cdcc4eae/index.html">
+<meta property="og:site_name" content="LegGasai&#39;s CSLearning">
+<meta property="og:description" content="简介分布式事务是指事务的参与者、支持事务的服务器、资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上。在分布式系统中，可能涉及到多个参与者，每个参与者负责管理自己的本地数据。分布式事务的目标是确保在整个分布式环境中，所有相关的操作要么全部成功，要么全部失败，以保持数据的一致性。（All or nothing）  基本理论CAP理论CAP是 Consistency、Availabilit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leggasai.github.io/img/avatar.PNG">
+<meta property="article:published_time" content="2024-02-22T12:51:07.000Z">
+<meta property="article:modified_time" content="2024-02-26T15:26:25.815Z">
+<meta property="article:author" content="LegGasai">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="分布式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leggasai.github.io/img/avatar.PNG"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leggasai.github.io/posts/cdcc4eae/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '分布式事务',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-26 23:26:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.png')"><nav id="nav"><span id="blog-info"><a href="/" title="LegGasai's CSLearning"><span class="site-name">LegGasai's CSLearning</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">分布式事务</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-22T12:51:07.000Z" title="发表于 2024-02-22 20:51:07">2024-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-26T15:26:25.815Z" title="更新于 2024-02-26 23:26:25">2024-02-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="分布式事务"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>分布式事务是指事务的参与者、支持事务的服务器、资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上。在分布式系统中，可能涉及到多个参与者，每个参与者负责管理自己的本地数据。分布式事务的目标是确保在整个分布式环境中，所有相关的操作要么全部成功，要么全部失败，以保持数据的一致性。（All or nothing）</p>
+<p><img src="/../../../img/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E5%9B%BE%20(7).png"></p>
+<h1 id="基本理论"><a href="#基本理论" class="headerlink" title="基本理论"></a>基本理论</h1><h2 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h2><p><strong>CAP</strong>是 <strong>Consistency</strong>、<strong>Availability</strong>、<strong>Partition tolerance</strong>三个词语的缩写，分别表示一致性、可用性、分区容忍性。</p>
+<ul>
+<li><strong>一致性(Consistency) <strong>：更新操作成功并返回客户端完成后，</strong>所有节点</strong>在<strong>同一时间</strong>的数据<strong>完全一致</strong>，不能存在中间状态。（这里指<strong>强一致性</strong>）</li>
+<li><strong>可用性(Availability)</strong> ： 系统提供的服务必须一直处于可用的状态，对于用户的每一个操作请求总是能够在<strong>有限时间</strong>内<strong>返回结果</strong>。</li>
+<li>**分区容错性(Partition tolerance) **：分布式系统在遇到任何网络分区故障时，仍然需要能够保证对外提供满足一致性和可用性的服务，除非是整个网络环境都发生了故障。</li>
+</ul>
+<blockquote>
+<p>任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。在互联网领域的绝大多数的场景中，都需要<strong>牺牲强一致性来换取系统的高可用性</strong>，系统往往只需要保证最终一致性。</p>
+</blockquote>
+<p>CAP理论权衡<br>由于C、A、P无法同时满足，必须有所舍弃。但如果放弃P（分区容错性），也就放弃了分布式。因此目前常见的分布式系统基于CAP分类主要有：AP和CP两类。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338835258">CAP理论该怎么理解？为什么是三选二？为什么是CP或者AP？面试题有哪些？ - 知乎 (zhihu.com)</a></p>
+<h2 id="Base理论"><a href="#Base理论" class="headerlink" title="Base理论"></a>Base理论</h2><blockquote>
+<p>CAP是分布式系统设计理论，BASE是CAP理论中AP方案的延伸，对于C我们采用的方式和策略就是保证最终一致性；</p>
+</blockquote>
+<p><strong>BASE</strong>是<strong>B</strong>asically <strong>A</strong>vailable（基本可用）、<strong>S</strong>oft state（软状态）和<strong>E</strong>ventually consistent（最终一致性）三个短语的缩写。BASE基于CAP定理演化而来，核心思想是即时无法做到强一致性，但每个应用都可以根据自身业务特点，采用适当的方式来使系统达到最终一致性。</p>
+<ul>
+<li>BA（基本可用）：分布式系统在出现不可预知的故障的时候，允许损失部分可用性，但不等于系统不可用。体现在（1）响应时间延长 （2）服务降级</li>
+<li>S（软状态）：允许系统中的数据存在中间状态，并认为该中间状态的存在不会影响系统的整体可用性。允许系统在不同节点的数据副本之间进行数据同步的过程存在延时。、</li>
+<li>E（最终一致性）：系统中所有的数据副本，在经过一段时间的同步后，最终能够达到一个一致的状态。</li>
+</ul>
+<p>BASE理论是提出通过牺牲一致性来获得可用性，并允许数据在一段时间内是不一致的，但最终达到一致状态。</p>
+<h1 id="分布式事务分类"><a href="#分布式事务分类" class="headerlink" title="分布式事务分类"></a>分布式事务分类</h1><p>分布式事务实现方案从类型上去分刚性事务、刚性事务</p>
+<h2 id="刚性事务"><a href="#刚性事务" class="headerlink" title="刚性事务"></a>刚性事务</h2><p>定义：无业务改造，强一致性，原生支持回滚&#x2F;隔离性，低并发，适合短事务。<br>原则：遵循CAP理论的CP原则。保证强一致性<br>实现方式：XA 协议（2PC、JTA、JTS）、3PC，但由于同步阻塞，处理效率低，不适合大型网站分布式场景。</p>
+<h2 id="柔性事务"><a href="#柔性事务" class="headerlink" title="柔性事务"></a>柔性事务</h2><p>定义：有业务改造，最终一致性，实现补偿接口，实现资源锁定接口，高并发，适合长事务。<br>原则：遵循Base理论（AP原则），允许中间状态，保证最终一致性。<br>实现方式：TCC&#x2F;FMT、Saga（状态机模式、Aop模式）、本地事务消息、消息事务（半消息）</p>
+<h1 id="刚性事务解决方案"><a href="#刚性事务解决方案" class="headerlink" title="刚性事务解决方案"></a>刚性事务解决方案</h1><h2 id="X-Open-DTP模型"><a href="#X-Open-DTP模型" class="headerlink" title="X&#x2F;Open DTP模型"></a>X&#x2F;Open DTP模型</h2><p>X&#x2F;Open <strong>DTP(Distributed Transaction Process)</strong> 是一个分布式事务模型。这个模型主要使用了两段提交(2PC - Two-Phase-Commit)来保证分布式事务的完整性。</p>
+<p>三大组件：<br>AP：Application，即应用程序。属于业务层，规定了事务所涉及的操作。<br>TM：Transaction Manager，事务管理器。是事务调度模型的核心部分，负责协调和管理事务，提供AP事务接口、管理RM事务提交。<br>RM：Resource Manager，资源管理器。如数据库，消息队列，文件系统等。<br><img src="/../../../img/Pasted%20image%2020240223190711.png"></p>
+<p>事务执行流程：<br><img src="/../../../img/Pasted%20image%2020240223190843.png"></p>
+<h2 id="XA协议"><a href="#XA协议" class="headerlink" title="XA协议"></a>XA协议</h2><p>在 X&#x2F;Open DTP分布式事务模型中，TM 和 多个 RM 的事务控制，都是<strong>基于 XA 协议来完成</strong>的。XA 协议也是 X&#x2F;Open 提出的分布式事务处理规范（基于2PC），也是分布式事务处理的工业标准，它定义了一组标准的函数接口，称为 <strong>xa 函数</strong>，用于管理和控制分布式事务的执行。</p>
+<p>目前，主流数据库都实现了 XA 接口，如 MySQL、Oracle、DB2、PGSQL等，它们都可以作为RM。</p>
+<p>常见的xa函数：<br>xa_open&#x2F;xa_close：建立和关闭与资源管理器的连接。<br>xa_start：启动一个xa事务。示例(mysql)：xa start xid ，xid必须全局唯一<br>xa_end：结束一个xa事务。示例(mysql)：xa end xid<br>xa_perpare：准备。示例(mysql)：xa perpare xid<br>xa_commit：提交xa事务。示例(mysql)：xa commit xid<br>xa_rollback：回滚xa事务。示例(mysql)：xa rollback xid</p>
+<p>XA各个阶段的处理流程<br><img src="/../../../img/Pasted%20image%2020240223191207.png"></p>
+<h2 id="2PC"><a href="#2PC" class="headerlink" title="2PC"></a>2PC</h2><p>2PC即Two-Phase Commit，二阶段提交。（标准的XA规范）</p>
+<p>一阶段（Prepare）：TM向各RM发送事务内容，RM执行事务（写入undo&#x2F;redo日志），但不提交。并向TM发送响应（成功或失败）。<br>二阶段（Commit）：TM根据各RM返回的结果，决定是否最终执行事务提价或回滚，并广播给RM执行Commit&#x2F;Rollback。然后各RM向TM返回响应结果（成功或失败）。注意这里RM如超时未收到TM的请求，则默认执行<strong>回滚</strong>操作。<br><img src="/../../../img/Pasted%20image%2020240223194517.png"></p>
+<p>优点：</p>
+<ul>
+<li>实现简单</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>同步阻塞，所有参与的RM都是事务阻塞，并且是锁定资源的，意味着不能进行其他操作；同时各个参与者还必须等待其他参与者完成响应。</li>
+<li>单点故障：由于TM是单点的，如果出现故障，所有RM都无法完成事务操作（第二阶段不能提交或回滚）</li>
+<li>数据不一致：在第二阶段TM发送Commit的时候，如果发送网络波动或TM崩溃，导致部分RM没有接收到请求，那么整个系统会出现数据不一致问题。</li>
+<li>缺少快速失败机制：在第一阶段，如果参与者出现故障，TM只能等待超时机制来得知。（3PC进行改进）</li>
+</ul>
+<h2 id="3PC"><a href="#3PC" class="headerlink" title="3PC"></a>3PC</h2><p>针对2PC的缺点，提出了3PC。在2PC的基础上添加了CanCommit阶段。</p>
+<p>一阶段（CanCommit）：TM询问RM是否可以提交事务，RM此时只检查是否因为部分因素导致事务无法成功提交，并加入了超时机制。RM返回响应（如果某个RM不能正常提交，后面就不执行了，相当于预检机制）<br>二阶段（PreCommit）：当所有RM返回YES时，TM向各RM发送事务内容，RM执行事务（写入undo&#x2F;redo日志），但不提交。<br>三阶段（DoCommit）：TM 根据 RM 在 PreCommit 阶段的响应，决定是否执行最终提交操作。如果所有 RM 都响应 PreCommit 成功，TM 发送 DoCommit 请求给所有 RM 执行 提交操作。否则，如果有任何一个 RM 响应 PreCommit 失败或超时，TM 发送 DoAbort 请求给所有 RM 执行回滚操作。注意这里RM如超时未收到TM的请求，则默认执行<strong>提交</strong>操作。</p>
+<p>从上述过程看出，3PC主要添加了预检机制以及修改了超时时的默认行为。改善了单点问题和回滚时的性能。但依旧存在数据不一致、阻塞等问题。</p>
+<h1 id="柔性事务解决方案"><a href="#柔性事务解决方案" class="headerlink" title="柔性事务解决方案"></a>柔性事务解决方案</h1><p>在电商领域等互联网场景下，刚性事务在数据库性能和处理能力上都暴露出了瓶颈。<br>柔性事务有两个特性：基本可用和柔性状态。</p>
+<ul>
+<li>基本可用是指分布式系统出现故障的时候允许损失一部分的可用性。</li>
+<li>柔性状态是指允许系统存在中间状态，这个中间状态不会影响系统整体的可用性，比如数据库读写分离的主从同步延迟等。柔性事务的一致性指的是<strong>最终一致性</strong>。</li>
+</ul>
+<p>柔性事务主要分为<strong>补偿性</strong>和<strong>通知型</strong></p>
+<ul>
+<li>补偿型事务：TCC、SAGA。是同步的</li>
+<li>通知型事务：MQ事务消息、最大努力通知型。是异步的</li>
+</ul>
+<h2 id="异步确保型"><a href="#异步确保型" class="headerlink" title="异步确保型"></a>异步确保型</h2><p>指将一系列同步的事务操作修改为基于消息队列异步执行的操作，来避免分布式事务中同步阻塞带来的数据操作性能的下降。</p>
+<h3 id="MQ事务消息方案"><a href="#MQ事务消息方案" class="headerlink" title="MQ事务消息方案"></a>MQ事务消息方案</h3><p>基于MQ的事务消息方案主要依靠MQ的<strong>半消息机制</strong>来实现投递消息和参与者自身本地事务的一致性保障。半消息机制实现原理其实借鉴的2PC的思路，是二阶段提交的广义拓展。</p>
+<p><strong>半消息机制</strong><br>通常包括两个步骤：发送半消息和确认半消息。</p>
+<ol>
+<li><strong>发送半消息（Send Half Message）：</strong><ul>
+<li>发送半消息是指在事务开始时，将消息发送到消息队列，但消息处于未确认的状态。</li>
+<li>在这个阶段，消息队列会持有这个消息，但不会将其投递给订阅者或消费者。</li>
+</ul>
+</li>
+<li><strong>确认半消息（Confirm Half Message）：</strong><ul>
+<li>确认半消息是指在事务执行成功时，发送确认请求给消息队列，让消息队列将消息标记为可投递状态。</li>
+<li>如果事务执行失败，发送取消请求给消息队列，让消息队列将消息标记为不可投递状态。</li>
+</ul>
+</li>
+</ol>
+<p><strong>流程：</strong><br><img src="/../../../img/Pasted%20image%2020240223204011.png"></p>
+<ol>
+<li>事务发起方首先发送半消息到MQ；</li>
+<li>MQ通知发送方消息发送成功；</li>
+<li>在发送半消息成功后执行本地事务；</li>
+<li>根据本地事务执行结果返回commit或者是rollback；</li>
+<li>如果消息是rollback, MQ将丢弃该消息不投递；如果是commit，MQ将会消息发送给消息订阅方；</li>
+<li>订阅方根据消息执行本地事务；</li>
+<li>订阅方执行本地事务成功后再从MQ中将该消息标记为已消费；</li>
+<li>如果执行本地事务过程中，执行端挂掉，或者超时，MQ服务器端将不停的询问producer来获取事务状态；</li>
+<li>Consumer端的消费成功机制有MQ保证；</li>
+</ol>
+<p>案例：用户下单后，增加用户账户积分。在这个业务中涉及到两个具有<strong>先后顺序</strong>关系的操作。只有订单服务成功创建订单后，才可以增加积分（保证原子性）</p>
+<ol>
+<li>订单服务创建订单</li>
+<li>订单服务向MQ发送<strong>半消息</strong></li>
+<li>积分服务增加积分<br><img src="/../../../img/Pasted%20image%2020240225224634.png"></li>
+</ol>
+<p>如果积分服务的事务失败，则需要回滚订单服务或重试。<br>如果涉及到更多的服务，比如创建订单，然后扣除库存，最后增加用户积分。则涉及到三类服务，订单服务、库存服务、积分服务。库存服务订阅订单服务，积分服务订阅库存服务。 </p>
+<ol>
+<li>订单服务创建订单</li>
+<li>订单服务向MQ发送半消息</li>
+<li>订单服务本地提交事务，并向MQ确认。</li>
+<li>库存服务收到MQ消息，向MQ发送半消息，并执行扣减库存事务。</li>
+<li>库存服务本地提交事务，并向MQ确认。</li>
+<li>积分服务收到MQ消息，执行增加积分事务。<br>如果某一服务执行失败，可能需要全部回滚或重试。</li>
+</ol>
+<p>RocketMQ实现异步确保型事务</p>
+<blockquote>
+<p>有一些第三方的MQ是支持事务消息的，这些消息队列，支持半消息机制，比如RocketMQ，ActiveMQ。但是有一些常用的MQ也不支持事务消息，比如 RabbitMQ 和 Kafka 都不支持。</p>
+</blockquote>
+<p>以阿里的 RocketMQ 中间件为例，其思路大致为：</p>
+<ol>
+<li>producer(本例中指A系统)发送半消息到broker，这个半消息不是说消息内容不完整， 它包含完整的消息内容， 在producer端和普通消息的发送逻辑一致</li>
+<li>broker存储半消息，半消息存储逻辑与普通消息一致，只是属性有所不同，topic是固定的RMQ_SYS_TRANS_HALF_TOPIC，queueId也是固定为0，这个tiopic中的消息对消费者是不可见的，所以里面的消息永远不会被消费。这就保证了在半消息提交成功之前，消费者是消费不到这个半消息的</li>
+<li>broker端半消息存储成功并返回后，A系统执行本地事务，并根据本地事务的执行结果来决定半消息的提交状态为提交或者回滚</li>
+<li>A系统发送结束半消息的请求，并带上提交状态(提交 or 回滚)</li>
+<li>broker端收到请求后，首先从RMQ_SYS_TRANS_HALF_TOPIC的queue中查出该消息，设置为完成状态。如果消息状态为提交，则把半消息从RMQ_SYS_TRANS_HALF_TOPIC队列中复制到这个消息原始topic的queue中去(之后这条消息就能被正常消费了)；如果消息状态为回滚，则什么也不做。</li>
+<li>producer发送的半消息结束请求是 oneway 的，也就是发送后就不管了，只靠这个是无法保证半消息一定被提交的，rocketMq提供了一个兜底方案，这个方案叫消息反查机制，Broker启动时，会启动一个TransactionalMessageCheckService 任务，该任务会定时从半消息队列中读出所有超时未完成的半消息，针对每条未完成的消息，Broker会给对应的Producer发送一个消息反查请求，根据反查结果来决定这个半消息是需要提交还是回滚，或者后面继续来反查</li>
+<li>consumer(本例中指B系统)消费消息，执行本地数据变更(至于B是否能消费成功，消费失败是否重试，这属于正常消息消费需要考虑的问题)</li>
+</ol>
+<p><img src="/../../../img/Pasted%20image%2020240225225653.png"><br><img src="/../../../img/Pasted%20image%2020240225225736.png"></p>
+<h3 id="本地消息表方案"><a href="#本地消息表方案" class="headerlink" title="本地消息表方案"></a>本地消息表方案</h3><p>有时候我们目前的MQ组件并不支持事务消息，或者我们想尽量少的侵入业务方。这时我们需要另外一种方案“基于DB本地消息表“。</p>
+<p>本地消息表最初由eBay 提出来解决分布式事务的问题。是目前业界使用的比较多的方案之一，它的核心思想就是将分布式事务<strong>拆分</strong>成本地事务进行处理。</p>
+<p><img src="/../../../img/Pasted%20image%2020240225230224.png"><br>消息发送方：</p>
+<ul>
+<li>需要有一个消息表，记录着消息状态相关信息。</li>
+<li>业务数据和消息表在同一个数据库，要保证它俩在同一个本地事务。直接利用本地事务，将业务数据和事务消息直接写入数据库。</li>
+<li>在本地事务中处理完业务数据和写消息表操作后，通过写消息到 MQ 消息队列。使用专门的投递工作线程进行事务消息投递到MQ，根据投递ACK去删除事务消息表记录</li>
+<li>消息会发到消息消费方，如果发送失败，即进行重试。</li>
+</ul>
+<p>消息消费方：</p>
+<ul>
+<li>处理消息队列中的消息，完成自己的业务逻辑。</li>
+<li>如果本地事务处理成功，则表明已经处理成功了，修改发送方消息表消息状态。</li>
+<li>如果本地事务处理失败，那么就会重试执行。</li>
+<li>如果是业务层面的失败，给消息生产方发送一个业务补偿消息，通知进行回滚等操作。</li>
+</ul>
+<p>生产方和消费方定时扫描本地消息表，把还没处理完成的消息或者失败的消息再发送一遍。如果有靠谱的自动对账补账逻辑，这种方案还是非常实用的。</p>
+<p><strong>优缺点：</strong><br>优点：</p>
+<ul>
+<li>本地消息表建设成本比较低，实现了可靠消息的传递确保了分布式事务的最终一致性。<br>无需提供回查方法，进一步减少的业务的侵入。</li>
+<li>在某些场景下，还可以进一步利用注解等形式进行解耦，有可能实现无业务代码侵入式的实现。<br>缺点：</li>
+<li>本地消息表与业务耦合在一起，难于做成通用性，不可独立伸缩。</li>
+<li>本地消息表是基于数据库来做的，而数据库是要读写磁盘IO的，因此在高并发下是有性能瓶颈的</li>
+</ul>
+<h3 id="MQ事务消息-VS-本地消息表"><a href="#MQ事务消息-VS-本地消息表" class="headerlink" title="MQ事务消息 VS 本地消息表"></a>MQ事务消息 VS 本地消息表</h3><p>相同点：</p>
+<ul>
+<li>事务消息都依赖于消息队列MQ，因此都是异步的（回调机制实现）。</li>
+<li>都存在重复投递的可能，需要去重机制或幂等设计。</li>
+<li>都需要实现业务补偿逻辑</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>MQ事务消息需要MQ的半消息特性支持，而本地消息表使用数据库记录消息状态</li>
+<li>MQ事务具有比较大的业务侵入性，需要业务方进行改造，提供对应的本地操作成功的回查功能</li>
+<li>MQ事务效率高，但具有业务耦合性。本地事务表的消息表也具有耦合性。</li>
+</ul>
+<h2 id="最大努力通知型"><a href="#最大努力通知型" class="headerlink" title="最大努力通知型"></a>最大努力通知型</h2><p>最大努力通知方案的目标，就是发起通知方通过一定的机制，最大努力将业务处理结果通知到接收方。一般使用<strong>衰减重试机制</strong>达到事务的最终一致性。</p>
+<p><strong>最大努力通知事务</strong>主要用于<strong>外部系统</strong>，因为外部的网络环境更加复杂和不可信，所以只能尽最大努力去通知实现数据最终一致性，<strong>比如充值平台与运营商、支付对接、商户通知等等跨平台、跨企业的系统间业务交互场景</strong>；</p>
+<p>而<strong>异步确保型事务</strong>主要适用于<strong>内部系统</strong>的数据最终一致性保障，因为内部相对比较可控，比如订单和购物车、收货与清算、支付与结算等等场景。</p>
+<h3 id="MQ事务消息方案-1"><a href="#MQ事务消息方案-1" class="headerlink" title="MQ事务消息方案"></a>MQ事务消息方案</h3><p>要实现最大努力通知，可以采用 MQ 的 ACK 机制。</p>
+<p>最大努力通知事务在投递之前，跟异步确保型流程都差不多，关键在于投递后的处理。因为异步确保型在于内部的事务处理，所以MQ和系统是直连并且无需严格的权限、安全等方面的思路设计。最大努力通知事务在于第三方系统的对接，所以最大努力通知事务有几个特性：</p>
+<ul>
+<li>业务主动方在完成业务处理后，向业务被动方(第三方系统)发送通知消息，允许存在消息丢失。</li>
+<li>业务主动方提供递增多挡位时间间隔(5min、10min、30min、1h、24h)，用于失败重试调用业务被动方的接口；在通知N次之后就不再通知，报警+记日志+人工介入。</li>
+<li>业务被动方提供幂等的服务接口，防止通知重复消费。</li>
+<li>业务主动方需要有定期校验机制，对业务数据进行兜底；防止业务被动方无法履行责任时进行业务回滚，确保数据最终一致性。</li>
+<li><strong>消息校对机制</strong>：在重复通知仍然没有通知到对方，可由接收通知方主动查询信息。</li>
+</ul>
+<p><img src="/../../../img/Pasted%20image%2020240226230339.png"></p>
+<ol>
+<li>业务活动的主动方，在完成业务处理之后，向业务活动的被动方发送消息，允许消息丢失。</li>
+<li>主动方可以设置时间阶梯型通知规则，在通知失败后按规则重复通知，直到通知N次后不再通知。</li>
+<li>主动方提供校对查询接口给被动方按需校对查询，用于恢复丢失的业务消息。</li>
+<li>业务活动的被动方如果正常接收了数据，就正常返回响应，并结束事务。</li>
+<li>如果被动方没有正常接收，根据定时策略，向业务活动<strong>主动方查询</strong>，恢复丢失的业务消息。</li>
+</ol>
+<p>场景：充值业务</p>
+<ol>
+<li>账户系统调用充值系统接口</li>
+<li>充值系统完成支付处理向账户系统发起充值结果通知<br>若通知失败，则充值系统按策略进行重复通知</li>
+<li>账户系统接收到充值结果通知修改充值状态</li>
+<li>账户系统未接收到通知会主动调用充值系统的接口查询充值结果<br><img src="/../../../img/Pasted%20image%2020240226230346.png"></li>
+</ol>
+<p><strong>特点</strong></p>
+<ol>
+<li>用到的服务模式：可查询操作、幂等操作；</li>
+<li>被动方的处理结果不影响主动方的处理结果；</li>
+<li>适用于对业务最终一致性的时间敏感度低的系统；</li>
+<li>适合跨企业的系统间的操作，或者企业内部比较独立的系统间的操作，比如银行通知、商户通知等；</li>
+</ol>
+<h3 id="本地消息表方案-1"><a href="#本地消息表方案-1" class="headerlink" title="本地消息表方案"></a>本地消息表方案</h3><p>要实现最大努力通知，可以采用定期<strong>检查本地消息表</strong>的机制 。<br><img src="/../../../img/Pasted%20image%2020240226231139.png"></p>
+<p>发送消息方：</p>
+<ul>
+<li>需要有一个消息表，记录着消息状态相关信息。</li>
+<li>业务数据和消息表在同一个数据库，要保证它俩在同一个本地事务。直接利用本地事务，将业务数据和事务消息直接写入数据库。</li>
+<li>在本地事务中处理完业务数据和写消息表操作后，通过写消息到 MQ 消息队列。使用专门的投递工作线程进行事务消息投递到MQ，根据投递ACK去删除事务消息表记录</li>
+<li>消息会发到消息消费方，如果发送失败，即进行重试。</li>
+<li>生产方定时扫描本地消息表，把还没处理完成的消息或者失败的消息再发送一遍。如果有靠谱的自动对账补账逻辑，这种方案还是非常实用的。</li>
+</ul>
+<h2 id="最大努力通知事务-VS-异步确保型事务"><a href="#最大努力通知事务-VS-异步确保型事务" class="headerlink" title="最大努力通知事务 VS 异步确保型事务"></a>最大努力通知事务 <strong>VS</strong> 异步确保型事务</h2><p>最大努力通知事务其实是基于异步确保型事务发展而来适用于外部对接的一种业务实现。他们主要有的是业务差别，如下：<br>• 从参与者来说：最大努力通知事务适用于跨平台、跨企业的系统间业务交互；异步确保型事务更适用于同网络体系的内部服务交付。<br>• 从消息层面说：最大努力通知事务需要主动推送并提供多档次时间的重试机制来保证数据的通知；而异步确保型事务只需要消息消费者主动去消费。<br>• 从数据层面说：最大努力通知事务还需额外的定期校验机制对数据进行兜底，保证数据的最终一致性；而异步确保型事务只需保证消息的可靠投递即可，自身无需对数据进行兜底处理。</p>
+<h2 id="补偿型"><a href="#补偿型" class="headerlink" title="补偿型"></a>补偿型</h2><h3 id="TCC事务"><a href="#TCC事务" class="headerlink" title="TCC事务"></a>TCC事务</h3><h3 id="SAGA事务"><a href="#SAGA事务" class="headerlink" title="SAGA事务"></a>SAGA事务</h3><h1 id="Seata框架"><a href="#Seata框架" class="headerlink" title="Seata框架"></a>Seata框架</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://leggasai.github.io">LegGasai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://leggasai.github.io/posts/cdcc4eae/">https://leggasai.github.io/posts/cdcc4eae/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://leggasai.github.io" target="_blank">LegGasai's CSLearning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a><a class="post-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/3e225941/" title="Java并发编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java并发编程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/1906f3d9/" title="MIT6.824"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-29</div><div class="title">MIT6.824</div></div></a></div><div><a href="/posts/906041f/" title="SchemaN"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-19</div><div class="title">SchemaN</div></div></a></div><div><a href="/posts/7b3d68/" title="Java八股文"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-19</div><div class="title">Java八股文</div></div></a></div><div><a href="/posts/6f2612a2/" title="SpringBoot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-14</div><div class="title">SpringBoot</div></div></a></div><div><a href="/posts/968190ef/" title="UCB CS186"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-17</div><div class="title">UCB CS186</div></div></a></div><div><a href="/posts/51e51a3e/" title="CMU 15-445"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-17</div><div class="title">CMU 15-445</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LegGasai</div><div class="author-info__description">作者描述</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LegGasai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LegGasai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jyc132780208@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_56522574" target="_blank" title="'#hdhfbb'"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog☺</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%90%86%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">基本理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="toc-number">2.1.</span> <span class="toc-text">CAP理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Base%E7%90%86%E8%AE%BA"><span class="toc-number">2.2.</span> <span class="toc-text">Base理论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">分布式事务分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9A%E6%80%A7%E4%BA%8B%E5%8A%A1"><span class="toc-number">3.1.</span> <span class="toc-text">刚性事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text">柔性事务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9A%E6%80%A7%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">4.</span> <span class="toc-text">刚性事务解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#X-Open-DTP%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">X&#x2F;Open DTP模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XA%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.2.</span> <span class="toc-text">XA协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2PC"><span class="toc-number">4.3.</span> <span class="toc-text">2PC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3PC"><span class="toc-number">4.4.</span> <span class="toc-text">3PC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">5.</span> <span class="toc-text">柔性事务解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%A1%AE%E4%BF%9D%E5%9E%8B"><span class="toc-number">5.1.</span> <span class="toc-text">异步确保型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%96%B9%E6%A1%88"><span class="toc-number">5.1.1.</span> <span class="toc-text">MQ事务消息方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8%E6%96%B9%E6%A1%88"><span class="toc-number">5.1.2.</span> <span class="toc-text">本地消息表方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF-VS-%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8"><span class="toc-number">5.1.3.</span> <span class="toc-text">MQ事务消息 VS 本地消息表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8A%AA%E5%8A%9B%E9%80%9A%E7%9F%A5%E5%9E%8B"><span class="toc-number">5.2.</span> <span class="toc-text">最大努力通知型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%96%B9%E6%A1%88-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">MQ事务消息方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8%E6%96%B9%E6%A1%88-1"><span class="toc-number">5.2.2.</span> <span class="toc-text">本地消息表方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8A%AA%E5%8A%9B%E9%80%9A%E7%9F%A5%E4%BA%8B%E5%8A%A1-VS-%E5%BC%82%E6%AD%A5%E7%A1%AE%E4%BF%9D%E5%9E%8B%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.3.</span> <span class="toc-text">最大努力通知事务 VS 异步确保型事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%81%BF%E5%9E%8B"><span class="toc-number">5.4.</span> <span class="toc-text">补偿型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCC%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.4.1.</span> <span class="toc-text">TCC事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAGA%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.4.2.</span> <span class="toc-text">SAGA事务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Seata%E6%A1%86%E6%9E%B6"><span class="toc-number">6.</span> <span class="toc-text">Seata框架</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cdcc4eae/" title="分布式事务">分布式事务</a><time datetime="2024-02-22T12:51:07.000Z" title="发表于 2024-02-22 20:51:07">2024-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3e225941/" title="Java并发编程">Java并发编程</a><time datetime="2024-02-19T13:28:56.000Z" title="发表于 2024-02-19 21:28:56">2024-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3fdc6854/" title="MIT6.S081">MIT6.S081</a><time datetime="2024-02-18T06:46:55.000Z" title="发表于 2024-02-18 14:46:55">2024-02-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4d88feef/" title="MIT6.830-Lab6">MIT6.830-Lab6</a><time datetime="2024-02-12T06:57:28.000Z" title="发表于 2024-02-12 14:57:28">2024-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d481af55/" title="MIT6.830-Lab5">MIT6.830-Lab5</a><time datetime="2024-02-09T01:44:52.000Z" title="发表于 2024-02-09 09:44:52">2024-02-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/footer.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By LegGasai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-vercel-aspa.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

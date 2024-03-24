@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://leggasai.github.io/img/avatar.PNG">
 <meta property="article:published_time" content="2024-02-22T12:51:07.000Z">
-<meta property="article:modified_time" content="2024-02-26T15:26:25.815Z">
+<meta property="article:modified_time" content="2024-03-24T14:40:30.977Z">
 <meta property="article:author" content="LegGasai">
 <meta property="article:tag" content="后端">
 <meta property="article:tag" content="分布式">
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-02-26 23:26:25'
+  postUpdate: '2024-03-24 22:40:30'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -163,7 +163,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.png')"><nav id="nav"><span id="blog-info"><a href="/" title="LegGasai's CSLearning"><span class="site-name">LegGasai's CSLearning</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">分布式事务</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-22T12:51:07.000Z" title="发表于 2024-02-22 20:51:07">2024-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-26T15:26:25.815Z" title="更新于 2024-02-26 23:26:25">2024-02-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="分布式事务"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>分布式事务是指事务的参与者、支持事务的服务器、资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上。在分布式系统中，可能涉及到多个参与者，每个参与者负责管理自己的本地数据。分布式事务的目标是确保在整个分布式环境中，所有相关的操作要么全部成功，要么全部失败，以保持数据的一致性。（All or nothing）</p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.png')"><nav id="nav"><span id="blog-info"><a href="/" title="LegGasai's CSLearning"><span class="site-name">LegGasai's CSLearning</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">分布式事务</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-22T12:51:07.000Z" title="发表于 2024-02-22 20:51:07">2024-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-24T14:40:30.977Z" title="更新于 2024-03-24 22:40:30">2024-03-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">微服务和分布式</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>41分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="分布式事务"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>分布式事务是指事务的参与者、支持事务的服务器、资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上。在分布式系统中，可能涉及到多个参与者，每个参与者负责管理自己的本地数据。分布式事务的目标是确保在整个分布式环境中，所有相关的操作要么全部成功，要么全部失败，以保持数据的一致性。（All or nothing）</p>
 <p><img src="/../../../img/%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E5%9B%BE%20(7).png"></p>
 <h1 id="基本理论"><a href="#基本理论" class="headerlink" title="基本理论"></a>基本理论</h1><h2 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h2><p><strong>CAP</strong>是 <strong>Consistency</strong>、<strong>Availability</strong>、<strong>Partition tolerance</strong>三个词语的缩写，分别表示一致性、可用性、分区容忍性。</p>
 <ul>
@@ -358,7 +358,389 @@
 <li>生产方定时扫描本地消息表，把还没处理完成的消息或者失败的消息再发送一遍。如果有靠谱的自动对账补账逻辑，这种方案还是非常实用的。</li>
 </ul>
 <h2 id="最大努力通知事务-VS-异步确保型事务"><a href="#最大努力通知事务-VS-异步确保型事务" class="headerlink" title="最大努力通知事务 VS 异步确保型事务"></a>最大努力通知事务 <strong>VS</strong> 异步确保型事务</h2><p>最大努力通知事务其实是基于异步确保型事务发展而来适用于外部对接的一种业务实现。他们主要有的是业务差别，如下：<br>• 从参与者来说：最大努力通知事务适用于跨平台、跨企业的系统间业务交互；异步确保型事务更适用于同网络体系的内部服务交付。<br>• 从消息层面说：最大努力通知事务需要主动推送并提供多档次时间的重试机制来保证数据的通知；而异步确保型事务只需要消息消费者主动去消费。<br>• 从数据层面说：最大努力通知事务还需额外的定期校验机制对数据进行兜底，保证数据的最终一致性；而异步确保型事务只需保证消息的可靠投递即可，自身无需对数据进行兜底处理。</p>
-<h2 id="补偿型"><a href="#补偿型" class="headerlink" title="补偿型"></a>补偿型</h2><h3 id="TCC事务"><a href="#TCC事务" class="headerlink" title="TCC事务"></a>TCC事务</h3><h3 id="SAGA事务"><a href="#SAGA事务" class="headerlink" title="SAGA事务"></a>SAGA事务</h3><h1 id="Seata框架"><a href="#Seata框架" class="headerlink" title="Seata框架"></a>Seata框架</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://leggasai.github.io">LegGasai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://leggasai.github.io/posts/cdcc4eae/">https://leggasai.github.io/posts/cdcc4eae/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://leggasai.github.io" target="_blank">LegGasai's CSLearning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a><a class="post-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/3e225941/" title="Java并发编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java并发编程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/1906f3d9/" title="MIT6.824"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-29</div><div class="title">MIT6.824</div></div></a></div><div><a href="/posts/906041f/" title="SchemaN"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-19</div><div class="title">SchemaN</div></div></a></div><div><a href="/posts/7b3d68/" title="Java八股文"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-19</div><div class="title">Java八股文</div></div></a></div><div><a href="/posts/6f2612a2/" title="SpringBoot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-14</div><div class="title">SpringBoot</div></div></a></div><div><a href="/posts/968190ef/" title="UCB CS186"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-17</div><div class="title">UCB CS186</div></div></a></div><div><a href="/posts/51e51a3e/" title="CMU 15-445"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-17</div><div class="title">CMU 15-445</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LegGasai</div><div class="author-info__description">作者描述</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LegGasai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LegGasai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jyc132780208@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_56522574" target="_blank" title="'#hdhfbb'"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog☺</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%90%86%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">基本理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="toc-number">2.1.</span> <span class="toc-text">CAP理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Base%E7%90%86%E8%AE%BA"><span class="toc-number">2.2.</span> <span class="toc-text">Base理论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">分布式事务分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9A%E6%80%A7%E4%BA%8B%E5%8A%A1"><span class="toc-number">3.1.</span> <span class="toc-text">刚性事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text">柔性事务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9A%E6%80%A7%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">4.</span> <span class="toc-text">刚性事务解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#X-Open-DTP%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">X&#x2F;Open DTP模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XA%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.2.</span> <span class="toc-text">XA协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2PC"><span class="toc-number">4.3.</span> <span class="toc-text">2PC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3PC"><span class="toc-number">4.4.</span> <span class="toc-text">3PC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">5.</span> <span class="toc-text">柔性事务解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%A1%AE%E4%BF%9D%E5%9E%8B"><span class="toc-number">5.1.</span> <span class="toc-text">异步确保型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%96%B9%E6%A1%88"><span class="toc-number">5.1.1.</span> <span class="toc-text">MQ事务消息方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8%E6%96%B9%E6%A1%88"><span class="toc-number">5.1.2.</span> <span class="toc-text">本地消息表方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF-VS-%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8"><span class="toc-number">5.1.3.</span> <span class="toc-text">MQ事务消息 VS 本地消息表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8A%AA%E5%8A%9B%E9%80%9A%E7%9F%A5%E5%9E%8B"><span class="toc-number">5.2.</span> <span class="toc-text">最大努力通知型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%96%B9%E6%A1%88-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">MQ事务消息方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8%E6%96%B9%E6%A1%88-1"><span class="toc-number">5.2.2.</span> <span class="toc-text">本地消息表方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8A%AA%E5%8A%9B%E9%80%9A%E7%9F%A5%E4%BA%8B%E5%8A%A1-VS-%E5%BC%82%E6%AD%A5%E7%A1%AE%E4%BF%9D%E5%9E%8B%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.3.</span> <span class="toc-text">最大努力通知事务 VS 异步确保型事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%81%BF%E5%9E%8B"><span class="toc-number">5.4.</span> <span class="toc-text">补偿型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCC%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.4.1.</span> <span class="toc-text">TCC事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAGA%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.4.2.</span> <span class="toc-text">SAGA事务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Seata%E6%A1%86%E6%9E%B6"><span class="toc-number">6.</span> <span class="toc-text">Seata框架</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/cdcc4eae/" title="分布式事务">分布式事务</a><time datetime="2024-02-22T12:51:07.000Z" title="发表于 2024-02-22 20:51:07">2024-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3e225941/" title="Java并发编程">Java并发编程</a><time datetime="2024-02-19T13:28:56.000Z" title="发表于 2024-02-19 21:28:56">2024-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3fdc6854/" title="MIT6.S081">MIT6.S081</a><time datetime="2024-02-18T06:46:55.000Z" title="发表于 2024-02-18 14:46:55">2024-02-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4d88feef/" title="MIT6.830-Lab6">MIT6.830-Lab6</a><time datetime="2024-02-12T06:57:28.000Z" title="发表于 2024-02-12 14:57:28">2024-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d481af55/" title="MIT6.830-Lab5">MIT6.830-Lab5</a><time datetime="2024-02-09T01:44:52.000Z" title="发表于 2024-02-09 09:44:52">2024-02-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/footer.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By LegGasai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+<h2 id="隔离性问题"><a href="#隔离性问题" class="headerlink" title="隔离性问题"></a>隔离性问题</h2><p>考虑电商系统中经典的“超售问题”。<br>商品下单一般会涉及两个操作，首先读商品库存，然后扣除库存。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">begin transaction</span><br><span class="line">read(stock)</span><br><span class="line">if stock &gt; 0:</span><br><span class="line">	write(stock-1)</span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+
+<p>为了确保不出现”超售“，上述事务必须要保障隔离等级为“可重复读”及以上，否则会出现用户A读取库存的时候，用户B下单成功，扣除了库存。这时用户A如果再次读取库存，会发现两次读取的数据不一致（不可重复读），那么用户A在后续扣除库存的时候，可能就会出现”超售“问题（如果用户B买走了最后一件商品的话，此时库存应该为0）。</p>
+<p>由于<strong>异步确保型</strong>和<strong>最大努力通知型</strong>都是异步的，有一定的延迟性，无法提供实时的隔离性保证。</p>
+<h2 id="补偿型"><a href="#补偿型" class="headerlink" title="补偿型"></a>补偿型</h2><p>补偿模式使用一个额外的协调服务来协调各个需要保证一致性的业务服务，协调服务按顺序调用各个业务微服务，如果某个业务服务调用异常（包括业务异常和技术异常）就取消之前所有已经调用成功的业务服务。</p>
+<h3 id="TCC事务"><a href="#TCC事务" class="headerlink" title="TCC事务"></a>TCC事务</h3><p>TCC 是另一种常见的分布式事务机制，它是“Try-Confirm-Cancel”三个单词的缩写，是由数据库专家 Pat Helland 在 2007 年撰写的论文《<a target="_blank" rel="noopener" href="https://www-db.cs.wisc.edu/cidr/cidr2007/papers/cidr07p15.pdf">Life beyond Distributed Transactions: An Apostate’s Opinion (opens new window)</a>》中提出。</p>
+<p>TCC 分布式事务模型包括三部分：</p>
+<ol>
+<li><p>主业务服务：主业务服务为整个业务活动的发起方，服务的编排者，负责发起并完成整个业务活动。</p>
+</li>
+<li><p>从业务服务：从业务服务是整个业务活动的参与方，负责提供 TCC 业务操作，实现初步操作(Try)、确认操作(Confirm)、取消操作(Cancel)三个接口，供主业务服务调用。<br><img src="/../../../img/Pasted%20image%2020240227224352.png"></p>
+</li>
+<li><p>业务活动管理器：业务活动管理器管理控制整个业务活动，包括记录维护 TCC 全局事务的事务状态和每个从业务服务的子事务状态，并在业务活动提交时调用所有从业务服务的 Confirm 操作，在业务活动取消时调用所有从业务服务的 Cancel 操作。</p>
+</li>
+</ol>
+<ul>
+<li><strong>Try</strong>：尝试执行阶段，完成所有业务可执行性的检查（保障一致性），并且预留好全部需用到的业务资源（保障隔离性）。</li>
+<li><strong>Confirm</strong>：确认执行阶段，真正执行的业务逻辑，不进行任何业务检查，直接使用 Try 阶段准备的资源来完成业务处理。Try成功，Confirm一定成功。Confirm 阶段可能会重复执行，因此本阶段所执行的操作需要具备<strong>幂等性</strong>。</li>
+<li><strong>Cancel</strong>：取消执行阶段，释放 Try 阶段预留的业务资源。Cancel 阶段可能会重复执行，也需要满足幂等性。</li>
+</ul>
+<p><strong>Confirm 或 Cancel 阶段</strong>： 两者是互斥的，只能进入其中一个，并且都满足幂等性，允许失败重试。<br><img src="/../../../img/Pasted%20image%2020240227224529.png"></p>
+<p><strong>TCC事务模型的要求</strong>：</p>
+<ul>
+<li>可查询操作：服务操作具有全局唯一的标识，操作唯一的确定的时间。</li>
+<li>幂等操作：重复调用多次产生的业务结果与调用一次产生的结果相同。一是通过业务操作实现幂等性，二是系统缓存所有请求与处理的结果，最后是检测到重复请求之后，自动返回之前的处理结果。</li>
+<li>TCC操作：Try阶段，尝试执行业务，完成所有业务的检查，实现一致性；预留必须的业务资源，实现准隔离性。Confirm阶段：真正的去执行业务，不做任何检查，仅适用Try阶段预留的业务资源，Confirm操作还要满足幂等性。Cancel阶段：取消执行业务，释放Try阶段预留的业务资源，Cancel操作要满足幂等性。TCC与2PC(两阶段提交)协议的区别：TCC位于业务服务层而不是资源层，TCC没有单独准备阶段，Try操作兼备资源操作与准备的能力，TCC中Try操作可以灵活的选择业务资源，锁定粒度。TCC的开发成本比2PC高。实际上TCC也属于两阶段操作，但是TCC不等同于2PC操作。</li>
+<li>可补偿操作：Do阶段：真正的执行业务处理，业务处理结果外部可见。Compensate阶段：抵消或者部分撤销正向业务操作的业务结果，补偿操作满足幂等性。约束：补偿操作在业务上可行，由于业务执行结果未隔离或者补偿不完整带来的风险与成本可控。实际上，TCC的Confirm和Cancel操作可以看做是补偿操作。</li>
+</ul>
+<h4 id="TCC事务模型-VS-DTP事务模型"><a href="#TCC事务模型-VS-DTP事务模型" class="headerlink" title="TCC事务模型 VS DTP事务模型"></a><strong>TCC事务模型 VS DTP事务模型</strong></h4><p><img src="/../../../img/Pasted%20image%2020240227225110.png"></p>
+<p>相似点：</p>
+<ul>
+<li>TCC事务的<strong>主业务服务</strong>相当于DTP模型中的<strong>AP</strong>；TCC事务的<strong>从业务服务</strong>相当于 DTP模型中的<strong>RM</strong><ul>
+<li>在DTP模型中，应用AP操作多个资源管理器RM上的资源；而在TCC模型中，是主业务服务操作多个从业务服务上的资源。例如航班预定案例中，美团App就是主业务服务，而川航和东航就是从业务服务，主业务服务需要使用从业务服务上的机票资源。不同的是DTP模型中的资源提供者是类似于Mysql这种关系型数据库，而TCC模型中资源的提供者是其他业务服务。</li>
+</ul>
+</li>
+<li>TCC中<strong>从业务服务</strong>的<code>Try</code>、<code>Confirm</code>、<code>Cancel</code>与DTP模型中<strong>RM</strong>提供的<code>Prepare</code>、<code>Commit</code>、<code>Rollback</code>接口类似。</li>
+<li>事务管理器<ul>
+<li>在DTP模型中，阶段1的(prepare)和阶段2的(commit、rollback)，都是由TM进行调用的。</li>
+<li>TCC中阶段1的try接口是主业务服务调用(绿色箭头)，阶段2的(confirm、cancel接口)是事务管理器TM调用(红色箭头)。这就是 TCC 分布式事务模型的二阶段异步化功能，从业务服务的第一阶段执行成功，主业务服务就可以提交完成，然后再由事务管理器框架异步的执行各从业务服务的第二阶段。这里牺牲了一定的隔离性和一致性的，但是提高了长事务的可用性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="TCC事务模型-VS-2PC"><a href="#TCC事务模型-VS-2PC" class="headerlink" title="TCC事务模型 VS 2PC"></a><strong>TCC事务模型 VS 2PC</strong></h4><p><img src="/../../../img/Pasted%20image%2020240227225607.png"></p>
+<p>阶段1：</p>
+<ul>
+<li>在XA中，各个RM准备提交各自的事务分支，事实上就是准备提交资源的更新操作(insert、delete、update等)；执行事务（写入undo&#x2F;redo log)，但不提交。</li>
+<li>在TCC中，是主业务活动请求(try)各个从业务服务<strong>预留</strong>资源。</li>
+</ul>
+<p>阶段2：</p>
+<ul>
+<li>XA根据第一阶段每个RM是否都prepare成功，判断是要提交还是回滚。如果都prepare成功，那么就commit每个事务分支，反之则rollback每个事务分支。</li>
+<li>TCC中，如果在第一阶段所有业务资源都预留成功，那么confirm各个从业务服务，否则取消(cancel)所有从业务服务的资源预留请求。</li>
+</ul>
+<p><strong>TCC和2PC不同点</strong></p>
+<ul>
+<li>XA是资源层面的分布式事务，强一致性，在两阶段提交的整个过程中，一直会持有资源的锁。基于数据库锁实现，需要数据库支持XA协议，由于在执行事务的全程都需要对相关数据加锁，一般高并发性能会比较差</li>
+<li>TCC是业务层面的分布式事务，最终一致性，不会一直持有资源的锁，性能较好。但是对微服务的侵入性强，微服务的每个事务都必须实现try、confirm、cancel等3个方法，开发成本高，今后维护改造的成本也高为了达到事务的一致性要求，try、confirm、cancel接口必须实现幂等性操作由于事务管理器要记录事务日志，必定会损耗一定的性能，并使得整个TCC事务时间拉长</li>
+<li>2PC的撤销是通过<strong>回滚事务</strong>实现，而TCC的撤销是基于<strong>补偿性事务</strong>，而不是简单的回滚。补偿是一个独立的支持ACID特性的本地事务，用于在逻辑上取消服务提供者上一个ACID事务造成的<strong>影响</strong>，对于一个长事务(long-running transaction)，与其实现一个巨大的分布式ACID事务，不如使用基于补偿性的方案，把每一次服务调用当做一个较短的本地ACID事务来处理，执行完就立即提交</li>
+</ul>
+<blockquote>
+<p>TCC的最终一致性要求弱化了对资源的锁定条件，进而提高了分布式下的并发性能</p>
+</blockquote>
+<h4 id="使用场景案例"><a href="#使用场景案例" class="headerlink" title="使用场景案例"></a>使用场景案例</h4><p>TCC是可以解决部分场景下的分布式事务的，但是，它的一个问题在于，需要每个参与者都分别实现Try，Confirm和Cancel接口及逻辑，这对于业务的侵入性是巨大的。</p>
+<p>TCC 方案严重依赖回滚和补偿代码，最终的结果是：回滚代码逻辑复杂，业务代码很难维护。所以，TCC 方案的使用场景较少，但是也有使用的场景。</p>
+<p>比如说跟钱打交道的，支付、交易相关的场景，大家会用 TCC方案，严格保<strong>证分布式事务要么全部成功，要么全部自动回滚</strong>，严格保证资金的正确性，保证在资金上不会出现问题。</p>
+<p>以下是一个网上书店购买书本的案例：<br><img src="/../../../img/Pasted%20image%2020240227230756.png"></p>
+<ol>
+<li>用户向 Fenix’s Bookstore 发送交易请求：购买一本价值 100 元的《深入理解 Java 虚拟机》。</li>
+<li>创建事务，生成事务 ID，记录在活动日志中，进入 Try 阶段：<ul>
+<li>用户服务：检查业务可行性，可行的话，将该用户的 100 元设置为“冻结”状态，通知下一步进入 Confirm 阶段；不可行的话，通知下一步进入 Cancel 阶段。</li>
+<li>仓库服务：检查业务可行性，可行的话，将该仓库的 1 本《深入理解 Java 虚拟机》设置为“冻结”状态，通知下一步进入 Confirm 阶段；不可行的话，通知下一步进入 Cancel 阶段。</li>
+<li>商家服务：检查业务可行性，不需要冻结资源。</li>
+</ul>
+</li>
+<li>如果第 2 步所有业务均反馈业务可行，将活动日志中的状态记录为 Confirm，进入 Confirm 阶段：<ul>
+<li>用户服务：完成业务操作（扣减那被冻结的 100 元）。</li>
+<li>仓库服务：完成业务操作（标记那 1 本冻结的书为出库状态，扣减相应库存）。</li>
+<li>商家服务：完成业务操作（收款 100 元）。</li>
+</ul>
+</li>
+<li>第 3 步如果全部完成，事务宣告正常结束，如果第 3 步中任何一方出现异常，不论是业务异常或者网络异常，都将根据活动日志中的记录，重复执行该服务的 Confirm 操作，即进行最大努力交付。</li>
+<li>如果第 2 步有任意一方反馈业务不可行，或任意一方超时，将活动日志的状态记录为 Cancel，进入 Cancel 阶段：<ul>
+<li>用户服务：取消业务操作（释放被冻结的 100 元）。</li>
+<li>仓库服务：取消业务操作（释放被冻结的 1 本书）。</li>
+<li>商家服务：取消业务操作（大哭一场后安慰商家谋生不易）。</li>
+</ul>
+</li>
+<li>第 5 步如果全部完成，事务宣告以失败回滚结束，如果第 5 步中任何一方出现异常，不论是业务异常或者网络异常，都将根据活动日志中的记录，重复执行该服务的 Cancel 操作，即进行最大努力交付。<br>如果上述重复执行失败，则可以进行告警，人工介入来处理。</li>
+</ol>
+<h3 id="SAGA事务"><a href="#SAGA事务" class="headerlink" title="SAGA事务"></a>SAGA事务</h3><p>SAGA可以看做一个异步的、利用队列实现的补偿事务。</p>
+<p>Saga模型是把一个分布式事务拆分为多个本地事务，每个本地事务都有相应的执行模块和补偿模块（对应TCC中的Confirm和Cancel），当Saga事务中任意一个本地事务出错时，可以通过调用相关的补偿方法恢复之前的事务，达到事务最终一致性。</p>
+<p>这样的SAGA事务模型，是牺牲了一定的隔离性和一致性的，但是提高了long-running事务的可用性。</p>
+<h5 id="Saga事务组成"><a href="#Saga事务组成" class="headerlink" title="Saga事务组成"></a>Saga事务组成</h5><ul>
+<li><strong>LLT</strong>（Long Live Transaction）：由一个个本地事务组成的事务链。</li>
+<li><strong>本地事务</strong>：事务链由一个个子事务（原子事务）组成，$LLT &#x3D; T1+T2+T3+…+Ti$。</li>
+<li><strong>补偿</strong>：每个本地事务 $Ti$有对应的补偿 $Ci$。</li>
+</ul>
+<p><strong>要求</strong></p>
+<ul>
+<li>$Ti$与 $Ci$都具备幂等性。</li>
+<li>$Ti$与 $Ci$满足交换律（Commutative），即先执行 $Ti$还是先执行 $Ci$，其效果都是一样的。</li>
+<li>$Ci$必须能成功提交，即不考虑 $Ci$本身提交失败被回滚的情形，如出现就必须持续重试直至成功，或者要人工介入。</li>
+</ul>
+<p>如果 $T1$到 $Tn$均成功提交，那事务顺利完成，否则，要采取以下两种恢复策略之一：</p>
+<ul>
+<li><p><strong>向后恢复</strong>（Backward Recovery）：撤销掉之前所有成功子事务。如果任意本地子事务失败，则补偿已完成的事务。如异常情况的执行顺序$T1,T2,T3,…Ti,Ci,…C3,C2,C1$。<br><img src="/../../../img/Pasted%20image%2020240228225511.png"></p>
+</li>
+<li><p><strong>向前恢复</strong>（Forward Recovery）：即重试失败的事务（最大努力交付），适用于必须要成功的场景，该情况下不需要执行补偿Ci。执行顺序：$T1,T2,…,Tj（失败）,Tj（重试）,…,Ti$。</p>
+</li>
+</ul>
+<p>显然，向前恢复没有必要提供补偿事务，如果你的业务中，子事务（最终）总会成功，或补偿事务难以定义或不可能，向前恢复更符合你的需求。</p>
+<p><strong>使用限制</strong></p>
+<ul>
+<li>不是所有的事务都能被补偿。补偿事务从语义角度撤消了事务$Ti$的行为，但未必能将数据库返回到执行$Ti$时的状态。</li>
+<li>Saga不提供ACID保证，因为原子性和隔离性不能得到满足。<ul>
+<li>原子性（Atomicity）：正常情况下保证，但不能完全保证。</li>
+<li>一致性（Consistency）：在某个时间点，会出现A库和B库的数据违反一致性要求的情况，但是最终是一致的。</li>
+<li>隔离性（Isolation）：在某个时间点，A事务能够读到B事务部分提交的结果。</li>
+<li>持久性（Durability）：和本地事务一样，只要commit则数据被持久。</li>
+</ul>
+</li>
+</ul>
+<h4 id="SAGA事务解决方案"><a href="#SAGA事务解决方案" class="headerlink" title="SAGA事务解决方案"></a>SAGA事务解决方案</h4><p>考虑业务逻辑如下：</p>
+<ol>
+<li>向DB中插入一条数据</li>
+<li>向MQ中发送一条消息</li>
+</ol>
+<h5 id="方案一：半消息模式"><a href="#方案一：半消息模式" class="headerlink" title="方案一：半消息模式"></a>方案一：半消息模式</h5><p>半消息的完整事务逻辑如下：</p>
+<ol>
+<li>向MQ发送半消息。</li>
+<li>向DB插入数据。</li>
+<li>向MQ发送确认消息。<br><img src="/../../../img/Pasted%20image%2020240228232407.png"><br>这样，即使第二步执行失败，那么MQ中的半消息也无法被消费者消费（相当于执行了补偿）</li>
+</ol>
+<p>为了解决确认消息丢失的问题，MQ引入了一个反查的机制。即MQ会每隔一段时间，对所有的半消息进行扫描，并就扫描到的存在时间过长的半消息，向发送者进行询问，询问如果得到确认回复，则将消息改为确认状态，如得到失败回复，则将消息删除。</p>
+<h5 id="方案二：本地消息表"><a href="#方案二：本地消息表" class="headerlink" title="方案二：本地消息表"></a>方案二：本地消息表</h5><p>在DB中，新增一个消息表，用于存放消息。如下：</p>
+<ol>
+<li>在DB业务表中插入数据。</li>
+<li>在DB消息表中插入数据。</li>
+<li>异步将消息表中的消息发送到MQ，收到ack后，删除消息表中的消息。<br><img src="/../../../img/Pasted%20image%2020240228232604.png"></li>
+</ol>
+<p>如上，通过上述逻辑，将一个分布式的事务，拆分成两大步。第1和第2，构成了一个本地的事务，从而解决了分布式事务的问题。<br>这种解决方案，不需要业务端提供消息查询接口，只需要稍微修改业务逻辑，侵入性是最小的。</p>
+<h4 id="SAGA的案例"><a href="#SAGA的案例" class="headerlink" title="SAGA的案例"></a>SAGA的案例</h4><p>SAGA适用于无需马上返回业务发起方最终状态的场景，例如：你的请求已提交，请稍后查询或留意通知 之类。</p>
+<p>将上述补偿事务的场景用SAGA改写，其流程如下：</p>
+<ol>
+<li>订单服务创建最终状态未知的订单记录，并提交事务T1</li>
+<li>现金服务扣除所需的金额，并提交事务T2</li>
+<li>订单服务更新订单状态为成功，并提交事务T3</li>
+</ol>
+<p>以上为成功的流程，若现金服务扣除金额失败，那么，最后一步订单服务将会更新订单状态为失败（补偿T1）。</p>
+<p>其业务编码工作量比补偿事务多一点，包括以下内容：</p>
+<ul>
+<li>订单服务创建初始订单的逻辑</li>
+<li>订单服务确认订单成功的逻辑</li>
+<li>订单服务确认订单失败的逻辑</li>
+<li>现金服务扣除现金的逻辑</li>
+<li>现金服务补偿返回现金的逻辑</li>
+</ul>
+<p>但其相对于补偿事务形态有性能上的优势，所有的本地子事务执行过程中，都无需等待其调用的子事务执行，减少了加锁的时间，这在事务流程较多较长的业务中性能优势更为明显。同时，其利用队列进行进行通讯，具有削峰填谷的作用。</p>
+<p>因此该形式适用于不需要同步返回发起方执行最终结果、可以进行补偿、对性能要求较高、不介意额外编码的业务场景。</p>
+<p>但当然SAGA也可以进行稍微改造，变成与TCC类似、可以进行资源预留的形态。</p>
+<h2 id="TCC-vs-SAGA"><a href="#TCC-vs-SAGA" class="headerlink" title="TCC vs SAGA"></a>TCC vs SAGA</h2><p>相同点：</p>
+<ul>
+<li>都是补偿性事务</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>TCC可以保障隔离性，SAGA无法保障</li>
+<li>SAGA业务侵入小，TCC需要全局改造</li>
+<li>SAGA事件驱动模式，参与者可异步执行，高吞吐；</li>
+</ul>
+<h1 id="总体方案对比"><a href="#总体方案对比" class="headerlink" title="总体方案对比"></a>总体方案对比</h1><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>2PC</th>
+<th>TCC</th>
+<th>Saga</th>
+<th>异步确保型事务</th>
+<th>尽最大努力通知</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>事务一致性</td>
+<td>强</td>
+<td>弱</td>
+<td>弱</td>
+<td>弱</td>
+<td>弱</td>
+</tr>
+<tr>
+<td>复杂性</td>
+<td>中</td>
+<td>高</td>
+<td>中</td>
+<td>低</td>
+<td>低</td>
+</tr>
+<tr>
+<td>业务侵入性</td>
+<td>小</td>
+<td>大</td>
+<td>小</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td>使用局限性</td>
+<td>大</td>
+<td>大</td>
+<td>中</td>
+<td>小</td>
+<td>中</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>低</td>
+<td>中</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+</tr>
+<tr>
+<td>维护成本</td>
+<td>低</td>
+<td>高</td>
+<td>中</td>
+<td>低</td>
+<td>中</td>
+</tr>
+</tbody></table>
+<h1 id="Seata框架"><a href="#Seata框架" class="headerlink" title="Seata框架"></a>Seata框架</h1><p><a target="_blank" rel="noopener" href="https://seata.apache.org/zh-cn/docs/user/quickstart/">快速启动 | Apache Seata</a><br>Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，为用户打造一站式的分布式解决方案。</p>
+<h2 id="领域模型"><a href="#领域模型" class="headerlink" title="领域模型"></a>领域模型</h2><ul>
+<li>TC ：事务协调者。负责我们的事务ID的生成，事务决议，注册、提交、回滚等。</li>
+<li>TM：事务管理者。定义事务的边界，负责告知 TC，分布式事务的开始，提交，回滚。</li>
+<li>RM：资源管理者。管理每个分支事务的资源，每一个 RM 都会作为一个分支事务注册在 TC。<br><img src="/../../../img/Pasted%20image%2020240302113013.png"></li>
+</ul>
+<h2 id="Seata事务的执行流程"><a href="#Seata事务的执行流程" class="headerlink" title="Seata事务的执行流程"></a><strong>Seata事务的执行流程</strong></h2><ol>
+<li>事务管理者（TM）通过RPC至事务协调者（TC）注册全局事务（Global Transaction）</li>
+<li>将TC生成的<code>XID</code>传递至其TM所调用的任意资源管理者（RM）中</li>
+<li>RM通过其接收到的<code>XID</code>,将其所管理的资源且被该调用锁使用到的资源注册为一个事务分支(Branch Transaction)</li>
+<li>当该请求的调用链全部结束时TM将事务的决议结果（Commit&#x2F;Rollback）通知TC</li>
+<li>TC将协调所有RM进行事务的二阶段动作（回滚&#x2F;提交）</li>
+</ol>
+<h2 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h2><p>AT 模式是 Seata 创新的一种非侵入式的分布式事务解决方案，Seata 在内部做了对数据库操作的代理层，我们使用 Seata AT 模式时，实际上用的是 Seata 自带的数据源代理 DataSourceProxy，Seata 在这层代理中加入了很多逻辑，比如插入回滚 undo_log 日志，检查全局锁等。</p>
+<p>AT模式是改进版的2PC模式，或XA模型。它不会一直锁定资源。</p>
+<ul>
+<li>一阶段：业务数据和回滚日志记录在同一个本地事务中提交，释放本地锁和连接资源。</li>
+<li>二阶段：<ul>
+<li>提交异步化，非常快速地完成。</li>
+<li>回滚通过一阶段的回滚日志进行反向补偿。</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h3><ul>
+<li>基于支持本地 ACID 事务的关系型数据库。</li>
+<li>Java 应用，通过 JDBC 访问数据库。</li>
+</ul>
+<h3 id="AT模型图"><a href="#AT模型图" class="headerlink" title="AT模型图"></a>AT模型图</h3><p><img src="/../../../img/Pasted%20image%2020240302114518.png"></p>
+<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h3><p>有个充值业务，现在有两个服务，一个负责管理用户的余额，另外一个负责管理用户的积分。</p>
+<blockquote>
+<p>当用户充值的时候，首先增加用户账户上的余额，然后增加用户的积分。</p>
+</blockquote>
+<p>Seata AT分为两阶段，主要逻辑全部在第一阶段，第二阶段主要做回滚或日志清理的工作。</p>
+<p>第一阶段：业务数据和回滚日志记录在同一个本地事务中提交，释放本地锁和连接资源。<br><img src="/../../../img/Pasted%20image%2020240302114851.png"></p>
+<ol>
+<li>余额服务中的TM，向TC申请开启一个全局事务，TC会返回一个全局的事务ID。</li>
+<li>余额服务在执行本地业务之前，RM会先向TC注册分支事务。</li>
+<li>余额服务依次生成undo log、执行本地事务、生成redo log，最后直接提交本地事务。</li>
+<li>余额服务的RM向TC汇报，事务状态是成功的。</li>
+<li>余额服务发起远程调用，把事务ID传给积分服务。</li>
+<li>积分服务在执行本地业务之前，也会先向TC注册分支事务。</li>
+<li>积分服务次生成undo log、执行本地事务、生成redo log，最后直接提交本地事务。</li>
+<li>积分服务的RM向TC汇报，事务状态是成功的。</li>
+<li>积分服务返回远程调用成功给余额服务。</li>
+<li>余额服务的TM向TC申请全局事务的提交&#x2F;回滚。</li>
+</ol>
+<p>第二阶段：异步提交或回滚</p>
+<ul>
+<li>提交：TC通知多个RM异步清理掉本地的redo和undo log</li>
+<li>回滚：TC通知每个RM回滚数据</li>
+</ul>
+<h3 id="读写隔离性"><a href="#读写隔离性" class="headerlink" title="读写隔离性"></a>读写隔离性</h3><p><strong>写隔离</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">分支事务1-开始</span><br><span class="line">| </span><br><span class="line">V 获取 本地锁</span><br><span class="line">| </span><br><span class="line">V 获取 全局锁    分支事务2-开始</span><br><span class="line">|               |</span><br><span class="line">V 释放 本地锁    V 获取 本地锁</span><br><span class="line">|               |</span><br><span class="line">V 释放 全局锁    V 获取 全局锁</span><br><span class="line">	            |</span><br><span class="line">                V 释放 本地锁</span><br><span class="line">                |</span><br><span class="line">                V 释放 全局锁</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如上所示，一个分布式事务的锁获取流程是这样的<br>1）先获取到本地锁，这样你已经可以修改本地数据了，只是还不能本地事务提交<br>2）而后，能否提交就是看能否获得全局锁（<strong>拿到全局锁才可以提交</strong>）<br>3）获得了全局锁，意味着可以修改了，那么可以提交本地事务，然后释放本地锁<br>4）当分布式事务全局提交，释放全局锁。这样就可以让其它事务获取全局锁，并提交它们对本地数据的修改了。</p>
+<p><strong>写隔离原则</strong></p>
+<ul>
+<li>一阶段本地事务提交前，需要确保先拿到 <strong>全局锁</strong> 。</li>
+<li>拿不到 <strong>全局锁</strong> ，不能提交本地事务。</li>
+<li>拿 <strong>全局锁</strong> 的尝试被限制在一定范围内，超出范围将放弃，并回滚本地事务，释放本地锁。</li>
+</ul>
+<p>以一个示例来说明：</p>
+<blockquote>
+<p>两个全局事务 tx1 和 tx2，分别对 a 表的 m 字段进行更新操作，m 的初始值 1000。</p>
+</blockquote>
+<p>tx1 先开始，开启本地事务，拿到本地锁，更新操作 m &#x3D; 1000 - 100 &#x3D; 900。本地事务提交前，先拿到该记录的 <strong>全局锁</strong> ，本地提交释放本地锁。（在此之前tx2一直在等待本地锁）</p>
+<p>tx2 后开始，开启本地事务，拿到本地锁（tx2可以拿到被tx1修改后的最新数据m&#x3D;900），更新操作 m &#x3D; 900 - 100 &#x3D; 800。本地事务提交前，尝试拿该记录的 <strong>全局锁</strong> ，tx1 全局提交前，该记录的全局锁被 tx1 持有，tx2 需要重试等待 <strong>全局锁</strong> 。</p>
+<p><img src="/../../../img/Pasted%20image%2020240302131351.png"><br>tx1 二阶段全局提交，释放 <strong>全局锁</strong> 。tx2 拿到 <strong>全局锁</strong> 提交本地事务。</p>
+<p>考虑如果tx1的第二阶段需要全局回滚，则 tx1 需要重新获取该数据的本地锁，进行反向补偿的更新操作，实现分支的回滚。（但此时本地锁被tx2持有，tx2在等待全局锁，tx1在等待本地锁，如果不做处理，就形成了循环等待死锁的局面）。</p>
+<p><img src="/../../../img/Pasted%20image%2020240302131634.png"></p>
+<p>此时，如果 tx2 仍在等待该数据的 <strong>全局锁</strong>，同时持有本地锁，则 tx1 的分支回滚会失败。分支的回滚会一直重试，直到 tx2 的 <strong>全局锁</strong> 等锁超时，放弃 <strong>全局锁</strong> 并回滚本地事务释放本地锁，tx1 的分支回滚最终成功。<br>因为整个过程 <strong>全局锁</strong> 在 tx1 结束前一直是被 tx1 持有的，所以不会发生 <strong>脏写</strong> 的问题。</p>
+<p><strong>读隔离</strong><br>在数据库本地事务隔离级别 <strong>读已提交（Read Committed）</strong> 或以上的基础上，Seata（AT 模式）的默认全局隔离级别是 <strong>读未提交（Read Uncommitted）</strong> 。（因为其他事务可能会全局回滚）</p>
+<p>如果应用在特定场景下，必需要求全局的 <strong>读已提交</strong> ，目前 Seata 的方式是通过 <strong>SELECT FOR UPDATE</strong> 语句的代理。<br><img src="/../../../img/Pasted%20image%2020240302132128.png"></p>
+<p>SELECT FOR UPDATE 语句的执行会申请 全局锁 ，如果 全局锁 被其他事务持有，则释放本地锁（回滚 SELECT FOR UPDATE 语句的本地执行）并重试。这个过程中，查询是被 block 住的，直到 全局锁 拿到，即读取的相关数据是 已提交 的，才返回。</p>
+<p>出于总体性能上的考虑，Seata 目前的方案并没有对所有 SELECT 语句都进行代理，仅针对 FOR UPDATE 的 SELECT 语句。</p>
+<h2 id="TCC模式"><a href="#TCC模式" class="headerlink" title="TCC模式"></a>TCC模式</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><p>TCC 与 Seata AT 事务一样都是<strong>两阶段事务</strong>，它与 AT 事务的主要区别为：</p>
+<ul>
+<li><strong>TCC 对业务代码侵入严重</strong><br>  每个阶段的数据操作都要自己进行编码来实现，事务框架无法自动处理。</li>
+<li><strong>TCC 性能更高</strong><br>  不必对数据加<strong>全局锁</strong>，允许多个事务同时操作数据。</li>
+</ul>
+<p>Seata TCC 整体是 <strong>两阶段提交</strong> 的模型。一个分布式的全局事务，全局事务是由若干分支事务组成的，分支事务要满足 <strong>两阶段提交</strong> 的模型要求，即需要每个分支事务都具备自己的：</p>
+<ul>
+<li>一阶段 prepare 行为</li>
+<li>二阶段 commit 或 rollback 行为</li>
+</ul>
+<p><img src="/../../../img/Pasted%20image%2020240302132435.png"></p>
+<p>根据两阶段行为模式的不同，我们将分支事务划分为 <strong>Automatic (Branch) Transaction Mode</strong> 和 <strong>TCC (Branch) Transaction Mode</strong>.</p>
+<p>AT 模式基于 <strong>支持本地 ACID 事务</strong> 的 <strong>关系型数据库</strong>：</p>
+<ul>
+<li>一阶段 prepare 行为：在本地事务中，一并提交业务数据更新和相应回滚日志记录。</li>
+<li>二阶段 commit 行为：马上成功结束，<strong>自动</strong> 异步批量清理回滚日志。</li>
+<li>二阶段 rollback 行为：通过回滚日志，<strong>自动</strong> 生成补偿操作，完成数据回滚。</li>
+</ul>
+<p>相应的，TCC 模式，不依赖于底层数据资源的事务支持：</p>
+<ul>
+<li>一阶段 prepare 行为：调用 <strong>自定义</strong> 的 prepare 逻辑。</li>
+<li>二阶段 commit 行为：调用 <strong>自定义</strong> 的 commit 逻辑。</li>
+<li>二阶段 rollback 行为：调用 <strong>自定义</strong> 的 rollback 逻辑。</li>
+</ul>
+<p>所谓 TCC 模式，是指支持把 <strong>自定义</strong> 的分支事务纳入到全局事务的管理中。</p>
+<p>TCC 的 Try 操作作为一阶段，负责资源的<strong>检查和预留</strong>；Confirm 操作作为二阶段<strong>提交操作</strong>，执行真正的业务；Cancel 是二阶段<strong>回滚操作</strong>，执行预留资源的取消，使资源回到初始状态。</p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>第一阶段 Try<br>以账户服务为例，当下订单时要扣减用户账户金额：<br><img src="/../../../img/Pasted%20image%2020240302133031.png"></p>
+<p>假如用户购买 100 元商品，要扣减 100 元。<br>TCC 事务首先对这100元的扣减金额进行<strong>预留</strong>，或者说是先冻结这100元（如果账户没有100元，该分支事务就直接失败了）<br><img src="/../../../img/Pasted%20image%2020240302133125.png"></p>
+<p>第二阶段 Confirm<br>如果第一阶段能够顺利完成，那么说明“扣减金额”业务(分支事务)最终肯定是可以成功的。当全局事务提交时， TC会控制当前分支事务进行提交，如果提交失败，TC 会反复尝试，直到提交成功为止。<br>当全局事务提交时，就可以使用冻结的金额来最终实现业务数据操作：<br><img src="/../../../img/Pasted%20image%2020240302133204.png"></p>
+<p>第二阶段 Cancel<br>如果全局事务回滚，就把冻结的金额进行解冻，恢复到以前的状态，TC 会控制当前分支事务回滚，如果回滚失败，TC 会反复尝试，直到回滚完成为止。<br><img src="/../../../img/Pasted%20image%2020240302133210.png"></p>
+<p>多个事务并发的情况<br>多个TCC全局事务允许并发，它们执行扣减金额时，只需要冻结各自的金额即可：<br><img src="/../../../img/Pasted%20image%2020240302133217.png"></p>
+<h2 id="SAGA模式"><a href="#SAGA模式" class="headerlink" title="SAGA模式"></a>SAGA模式</h2><h3 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h3><p>Saga 模式是 SEATA 提供的长事务解决方案，在 Saga 模式中，业务流程中每个参与者都提交本地事务，当出现某一个参与者失败则补偿前面已经成功的参与者，一阶段<strong>正向服务</strong>和二阶段<strong>补偿服务</strong>都由业务开发实现。<br><img src="/../../../img/Pasted%20image%2020240302134538.png"></p>
+<p>适用场景：</p>
+<ul>
+<li>业务流程长、业务流程多</li>
+<li>参与者包含其它公司或遗留系统服务，无法提供 TCC 模式要求的三个接口</li>
+</ul>
+<p>优势：</p>
+<ul>
+<li>一阶段提交本地事务，无锁，高性能</li>
+<li>事件驱动架构，参与者可异步执行，高吞吐</li>
+<li>补偿服务易于实现</li>
+</ul>
+<p> 缺点：</p>
+<ul>
+<li>不保证隔离性</li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>目前 SEATA 提供的 Saga 模式是基于状态机引擎来实现的，机制是：</p>
+<ol>
+<li>通过状态图来定义服务调用的流程并生成 json 状态语言定义文件</li>
+<li>状态图中一个节点可以是调用一个服务，节点可以配置它的补偿节点</li>
+<li>状态图 json 由状态机引擎驱动执行，当出现异常时状态引擎反向执行已成功节点对应的补偿节点将事务回滚<blockquote>
+<p>注意: 异常发生时是否进行补偿也可由用户自定义决定</p>
+</blockquote>
+</li>
+<li>可以实现服务编排需求，支持单项选择、并发、子流程、参数转换、参数映射、服务执行状态判断、异常捕获等功能</li>
+</ol>
+<p><img src="/../../../img/Pasted%20image%2020240302134745.png"></p>
+<h2 id="XA模式"><a href="#XA模式" class="headerlink" title="XA模式"></a>XA模式</h2><p><strong>使用前提</strong></p>
+<ul>
+<li>支持XA 事务的数据库。</li>
+<li>Java 应用，通过 JDBC 访问数据库。</li>
+</ul>
+<p>在 Seata 定义的分布式事务框架内，利用事务资源（数据库、消息服务等）对<strong>XA 协议</strong>的支持，以 XA 协议的机制来管理分支事务的一种 事务模式。<br><img src="/../../../img/Pasted%20image%2020240302135237.png"></p>
+<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p><strong>整体运行机制</strong><br>XA 模式 运行在 Seata 定义的事务框架内：</p>
+<p><img src="/../../../img/Pasted%20image%2020240302135439.png"></p>
+<ul>
+<li>执行阶段<ul>
+<li>XA start + XA end + XA prepare + SQL + 注册分支</li>
+</ul>
+</li>
+<li>完成阶段<ul>
+<li>XA commit&#x2F;XA rollback</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://leggasai.github.io">LegGasai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://leggasai.github.io/posts/cdcc4eae/">https://leggasai.github.io/posts/cdcc4eae/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://leggasai.github.io" target="_blank">LegGasai's CSLearning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a><a class="post-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/3e225941/" title="Java并发编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java并发编程</div></div></a></div><div class="next-post pull-right"><a href="/posts/364ea8cc/" title="设计模式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">设计模式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/1906f3d9/" title="MIT6.824"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-29</div><div class="title">MIT6.824</div></div></a></div><div><a href="/posts/906041f/" title="SchemaN"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-19</div><div class="title">SchemaN</div></div></a></div><div><a href="/posts/7b3d68/" title="Java八股文"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-19</div><div class="title">Java八股文</div></div></a></div><div><a href="/posts/6f2612a2/" title="SpringBoot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-14</div><div class="title">SpringBoot</div></div></a></div><div><a href="/posts/968190ef/" title="UCB CS186"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-17</div><div class="title">UCB CS186</div></div></a></div><div><a href="/posts/51e51a3e/" title="CMU 15-445"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-17</div><div class="title">CMU 15-445</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LegGasai</div><div class="author-info__description">作者描述</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LegGasai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LegGasai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jyc132780208@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_56522574" target="_blank" title="'#hdhfbb'"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog☺</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%90%86%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">基本理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAP%E7%90%86%E8%AE%BA"><span class="toc-number">2.1.</span> <span class="toc-text">CAP理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Base%E7%90%86%E8%AE%BA"><span class="toc-number">2.2.</span> <span class="toc-text">Base理论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">分布式事务分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9A%E6%80%A7%E4%BA%8B%E5%8A%A1"><span class="toc-number">3.1.</span> <span class="toc-text">刚性事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text">柔性事务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9A%E6%80%A7%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">4.</span> <span class="toc-text">刚性事务解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#X-Open-DTP%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">X&#x2F;Open DTP模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XA%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.2.</span> <span class="toc-text">XA协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2PC"><span class="toc-number">4.3.</span> <span class="toc-text">2PC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3PC"><span class="toc-number">4.4.</span> <span class="toc-text">3PC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">5.</span> <span class="toc-text">柔性事务解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%A1%AE%E4%BF%9D%E5%9E%8B"><span class="toc-number">5.1.</span> <span class="toc-text">异步确保型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%96%B9%E6%A1%88"><span class="toc-number">5.1.1.</span> <span class="toc-text">MQ事务消息方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8%E6%96%B9%E6%A1%88"><span class="toc-number">5.1.2.</span> <span class="toc-text">本地消息表方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF-VS-%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8"><span class="toc-number">5.1.3.</span> <span class="toc-text">MQ事务消息 VS 本地消息表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8A%AA%E5%8A%9B%E9%80%9A%E7%9F%A5%E5%9E%8B"><span class="toc-number">5.2.</span> <span class="toc-text">最大努力通知型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E6%96%B9%E6%A1%88-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">MQ事务消息方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8%E6%96%B9%E6%A1%88-1"><span class="toc-number">5.2.2.</span> <span class="toc-text">本地消息表方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%8A%AA%E5%8A%9B%E9%80%9A%E7%9F%A5%E4%BA%8B%E5%8A%A1-VS-%E5%BC%82%E6%AD%A5%E7%A1%AE%E4%BF%9D%E5%9E%8B%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.3.</span> <span class="toc-text">最大努力通知事务 VS 异步确保型事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">5.4.</span> <span class="toc-text">隔离性问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%81%BF%E5%9E%8B"><span class="toc-number">5.5.</span> <span class="toc-text">补偿型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCC%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.5.1.</span> <span class="toc-text">TCC事务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCC%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B-VS-DTP%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.5.1.1.</span> <span class="toc-text">TCC事务模型 VS DTP事务模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCC%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B-VS-2PC"><span class="toc-number">5.5.1.2.</span> <span class="toc-text">TCC事务模型 VS 2PC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E6%A1%88%E4%BE%8B"><span class="toc-number">5.5.1.3.</span> <span class="toc-text">使用场景案例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAGA%E4%BA%8B%E5%8A%A1"><span class="toc-number">5.5.2.</span> <span class="toc-text">SAGA事务</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Saga%E4%BA%8B%E5%8A%A1%E7%BB%84%E6%88%90"><span class="toc-number">5.5.2.0.1.</span> <span class="toc-text">Saga事务组成</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SAGA%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">5.5.2.1.</span> <span class="toc-text">SAGA事务解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9A%E5%8D%8A%E6%B6%88%E6%81%AF%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.5.2.1.1.</span> <span class="toc-text">方案一：半消息模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A%E6%9C%AC%E5%9C%B0%E6%B6%88%E6%81%AF%E8%A1%A8"><span class="toc-number">5.5.2.1.2.</span> <span class="toc-text">方案二：本地消息表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SAGA%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="toc-number">5.5.2.2.</span> <span class="toc-text">SAGA的案例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-vs-SAGA"><span class="toc-number">5.6.</span> <span class="toc-text">TCC vs SAGA</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="toc-number">6.</span> <span class="toc-text">总体方案对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Seata%E6%A1%86%E6%9E%B6"><span class="toc-number">7.</span> <span class="toc-text">Seata框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B"><span class="toc-number">7.1.</span> <span class="toc-text">领域模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Seata%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">7.2.</span> <span class="toc-text">Seata事务的执行流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AT%E6%A8%A1%E5%BC%8F"><span class="toc-number">7.3.</span> <span class="toc-text">AT模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%89%8D%E6%8F%90"><span class="toc-number">7.3.1.</span> <span class="toc-text">使用前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT%E6%A8%A1%E5%9E%8B%E5%9B%BE"><span class="toc-number">7.3.2.</span> <span class="toc-text">AT模型图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="toc-number">7.3.3.</span> <span class="toc-text">使用案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="toc-number">7.3.4.</span> <span class="toc-text">读写隔离性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC%E6%A8%A1%E5%BC%8F"><span class="toc-number">7.4.</span> <span class="toc-text">TCC模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">7.4.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">7.4.2.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SAGA%E6%A8%A1%E5%BC%8F"><span class="toc-number">7.5.</span> <span class="toc-text">SAGA模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="toc-number">7.5.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">7.5.2.</span> <span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XA%E6%A8%A1%E5%BC%8F"><span class="toc-number">7.6.</span> <span class="toc-text">XA模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">7.6.1.</span> <span class="toc-text">工作机制</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6c92115f/" title="Spring">Spring</a><time datetime="2024-03-21T06:21:09.000Z" title="发表于 2024-03-21 14:21:09">2024-03-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/bcab05d2/" title="实现RPC框架——gsRPC">实现RPC框架——gsRPC</a><time datetime="2024-03-19T14:12:22.000Z" title="发表于 2024-03-19 22:12:22">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1c6ba3e2/" title="Netty">Netty</a><time datetime="2024-03-10T06:30:59.000Z" title="发表于 2024-03-10 14:30:59">2024-03-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a0419e9f/" title="CSAPP">CSAPP</a><time datetime="2024-03-09T07:49:06.000Z" title="发表于 2024-03-09 15:49:06">2024-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/364ea8cc/" title="设计模式">设计模式</a><time datetime="2024-03-04T13:40:29.000Z" title="发表于 2024-03-04 21:40:29">2024-03-04</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/footer.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By LegGasai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>function loadWaline () {
   function initWaline () {
     const waline = Waline.init(Object.assign({
       el: '#waline-wrap',

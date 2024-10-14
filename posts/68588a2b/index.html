@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>服务网格 | LegGasai's CSLearning</title><meta name="author" content="LegGasai"><meta name="copyright" content="LegGasai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="定义是一种用于处理微服务架构中服务间通信的基础设施层，负责管理服务之间的网络流量。它解耦了应用逻辑与网络层的通信细节，并通过代理实现服务发现、负载均衡、故障恢复、安全（如 mTLS 加密通信）、监控和策略执行等功能。 在云原生架构中，服务网格由一组轻量级的代理（sidecar）组成，这些代理与每个微服务实例一起运行。服务网格通常包括两个主要部分：  数据平面（Data Plane）：由部署在每个服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务网格">
+<meta property="og:url" content="https://leggasai.github.io/posts/68588a2b/index.html">
+<meta property="og:site_name" content="LegGasai&#39;s CSLearning">
+<meta property="og:description" content="定义是一种用于处理微服务架构中服务间通信的基础设施层，负责管理服务之间的网络流量。它解耦了应用逻辑与网络层的通信细节，并通过代理实现服务发现、负载均衡、故障恢复、安全（如 mTLS 加密通信）、监控和策略执行等功能。 在云原生架构中，服务网格由一组轻量级的代理（sidecar）组成，这些代理与每个微服务实例一起运行。服务网格通常包括两个主要部分：  数据平面（Data Plane）：由部署在每个服">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leggasai.github.io/img/avatar.PNG">
+<meta property="article:published_time" content="2024-09-25T05:20:04.000Z">
+<meta property="article:modified_time" content="2024-10-14T05:52:20.801Z">
+<meta property="article:author" content="LegGasai">
+<meta property="article:tag" content="云原生">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leggasai.github.io/img/avatar.PNG"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leggasai.github.io/posts/68588a2b/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '服务网格',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-14 13:52:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.png')"><nav id="nav"><span id="blog-info"><a href="/" title="LegGasai's CSLearning"><span class="site-name">LegGasai's CSLearning</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">服务网格</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-25T05:20:04.000Z" title="发表于 2024-09-25 13:20:04">2024-09-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-14T05:52:20.801Z" title="更新于 2024-10-14 13:52:20">2024-10-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="服务网格"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>是一种用于处理微服务架构中服务间通信的基础设施层，负责管理服务之间的网络流量。它解耦了应用逻辑与网络层的通信细节，并通过代理实现服务发现、负载均衡、故障恢复、安全（如 mTLS 加密通信）、监控和策略执行等功能。</p>
+<p>在云原生架构中，服务网格由一组轻量级的<strong>代理（sidecar）</strong>组成，这些代理与每个微服务实例一起运行。服务网格通常包括两个主要部分：</p>
+<ol>
+<li><p><strong>数据平面（Data Plane）</strong>：由部署在每个服务实例旁边的代理组成，它们拦截所有入站和出站的流量，负责实现服务之间的通信。</p>
+</li>
+<li><p><strong>控制平面（Control Plane）</strong>：负责配置和管理数据平面中的代理，提供服务发现、负载均衡、健康检查、安全等功能。</p>
+</li>
+</ol>
+<p>  <img src="/../../../img/1280X1280.png"></p>
+<h1 id="服务网格工作原理的例子"><a href="#服务网格工作原理的例子" class="headerlink" title="服务网格工作原理的例子"></a>服务网格工作原理的例子</h1><p>假设你有两个微服务：</p>
+<ul>
+<li><p><strong>ServiceA</strong>：一个订单服务。</p>
+</li>
+<li><p><strong>ServiceB</strong>：一个支付服务。</p>
+</li>
+</ul>
+<p>在没有服务网格的情况下，ServiceA 直接调用 ServiceB，依赖 DNS 或服务发现机制来找到 ServiceB 的地址，可能需要自行处理重试、超时、日志、负载均衡、安全等逻辑。这种直接通信的耦合使得管理、监控和排查问题变得复杂。</p>
+<p>引入服务网格之后，服务间的通信通过服务网格代理进行。以下是具体场景：</p>
+<h4 id="场景描述："><a href="#场景描述：" class="headerlink" title="场景描述："></a>场景描述：</h4><ol>
+<li><p><strong>ServiceA</strong> 想要调用 <strong>ServiceB</strong> 完成支付操作。</p>
+</li>
+<li><p>ServiceA 和 ServiceB 分别运行在 Kubernetes 集群中，并且被服务网格代理（比如 <strong>Envoy</strong>）接管流量。</p>
+</li>
+</ol>
+<h4 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h4><ol>
+<li><p><strong>ServiceA 调用 ServiceB</strong>：</p>
+<ol>
+<li><p>ServiceA 发出请求时，请求不会直接到达 ServiceB。</p>
+</li>
+<li><p>ServiceA 的请求首先通过 ServiceA 旁边的服务网格代理 (sidecar)，这个代理会对请求进行处理。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>服务发现与****负载均衡</strong>：</p>
+<ol>
+<li><p>ServiceA 的代理会通过服务网格的控制平面来查询 ServiceB 的服务信息，找到可用的 ServiceB 实例。</p>
+</li>
+<li><p>假设有多个 ServiceB 实例（副本），服务网格会根据策略进行负载均衡，比如轮询或基于流量的智能负载均衡。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>安全与加密</strong>：</p>
+<ol>
+<li>服务网格会自动处理通信的安全性问题。比如它会通过 <strong>mTLS（双向</strong> <strong>TLS****）</strong> 为 ServiceA 和 ServiceB 之间的通信建立安全连接，确保数据加密和身份验证，不需要开发人员手动配置加密。</li>
+</ol>
+</li>
+<li><p><strong>请求发送****到 ServiceB</strong>：</p>
+<ol>
+<li><p>代理处理完这些逻辑后，安全地将请求转发给 ServiceB 的代理。</p>
+</li>
+<li><p>ServiceB 的代理接收到流量并将其传递给 ServiceB。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>监控与追踪</strong>：</p>
+<ol>
+<li>在通信过程中，服务网格的代理会自动收集指标（如延迟、请求成功率等）并上报给监控系统。这些代理还会注入分布式追踪信息，帮助运维人员更好地理解请求是如何在多个服务之间流动的。</li>
+</ol>
+</li>
+<li><p><strong>失败处理与重试</strong>：</p>
+<ol>
+<li>如果调用失败，比如 ServiceB 某个实例不可用，服务网格代理可以根据定义好的策略自动进行重试或切换到其他 ServiceB 实例。</li>
+</ol>
+</li>
+</ol>
+<h4 id="服务网格提供的功能"><a href="#服务网格提供的功能" class="headerlink" title="服务网格提供的功能"></a>服务网格提供的功能</h4><ol>
+<li><p><strong>自动****负载均衡</strong>：服务网格可以根据配置的负载均衡策略，将流量合理分配到多个服务实例上。</p>
+</li>
+<li><p><strong>故障恢复</strong>：服务网格支持自动重试和熔断机制。如果某个服务无法响应，服务网格会自动切换到其他健康的服务。</p>
+</li>
+<li><p><strong>流量管理</strong>：服务网格支持流量控制和智能路由，可以通过策略控制流量的分发，比如蓝绿部署、金丝雀发布等。</p>
+</li>
+<li><p><strong>安全性</strong>：通过 mTLS 自动实现双向认证和加密，无需开发人员在代码中手动处理证书和加密逻辑。</p>
+</li>
+<li><p><strong>可观测性</strong>：服务网格会自动收集大量的运行时指标和日志信息，提供分布式追踪功能，帮助开发者和运维人员分析和诊断系统性能。</p>
+</li>
+<li><p><strong>策略执行</strong>：服务网格允许定义策略，比如访问控制、限流和配额，来管理服务之间的交互。</p>
+</li>
+</ol>
+<h1 id="Istio"><a href="#Istio" class="headerlink" title="Istio"></a>Istio</h1><p>Istio是一个服务网络的开源实现。</p>
+<p><a target="_blank" rel="noopener" href="https://istio.io/">https://istio.io/</a></p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p><strong>流量管理</strong></p>
+<p>利用配置，我们可以控制服务间的流量。设置断路器、超时或重试都可以通过简单的配置改变来完成。</p>
+<p><strong>可观测性</strong></p>
+<p>Istio 通过跟踪、监控和记录让我们更好地了解你的服务，它让我们能够快速发现和修复问题。</p>
+<p><strong>安全性</strong></p>
+<p>Istio 可以在代理层面上管理认证、授权和通信的加密。我们可以通过快速的配置变更在各个服务中执行政策。</p>
+<h2 id="构成"><a href="#构成" class="headerlink" title="构成"></a>构成</h2><p>Istio服务网格有两部分构成：<strong>数据平面</strong>和<strong>控制平面</strong>。<br><img src="/../../../img/0d610611-4a56-4ea5-ad64-8282b217f0cb.png"></p>
+<h3 id="Envoy（数据平面）"><a href="#Envoy（数据平面）" class="headerlink" title="Envoy（数据平面）"></a>Envoy（数据平面）</h3><p>Envoy 是一个用 C++ 开发的高性能代理。Istio 服务网格将 Envoy 代理作为一个 <strong>sidecar</strong> 容器注入到你的应用容器旁边。然后该代理拦截该服务的所有入站和出站流量。注入的代理一起构成了服务网格的数据平面。</p>
+<p>Envoy 代理也是唯一与流量进行交互的组件。除了前面提到的功能 —— 负载均衡、断路器、故障注入、重试等。Envoy 还支持基于 WebAssembly（WASM）的可插拔扩展模型。这种可扩展性使我们能够执行自定义策略，并为网格中的流量生成遥测数据。</p>
+<p>  <img src="/../../../img/d60b94eb-06d6-4fb7-9e19-96ae354ad8ed.png"></p>
+<h3 id="Istiod（控制平面）"><a href="#Istiod（控制平面）" class="headerlink" title="Istiod（控制平面）"></a>Istiod（控制平面）</h3><p>Istiod 是控制平面组件，提供服务发现、配置和证书管理功能。Istiod 采用 YAML 编写的高级规则，并将其转换为 Envoy 的可操作配置。然后，它把这个配置传播给网格中的所有 sidecar。</p>
+<p>Istiod 内部的 Pilot 组件抽象出特定平台的服务发现机制（Kubernetes、Consul 或 VM），并将其转换为 sidecar 可以使用的标准格式。</p>
+<p>使用内置的身份和凭证管理，我们可以实现强大的服务间和终端用户认证。通过授权功能，我们可以控制谁可以访问你的服务。</p>
+<p>控制平面的部分以前被称为 Citadel，作为一个证书授权机构，生成证书，允许数据平面中的代理之间进行安全的 mTLS 通信。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://leggasai.github.io">LegGasai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://leggasai.github.io/posts/68588a2b/">https://leggasai.github.io/posts/68588a2b/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://leggasai.github.io" target="_blank">LegGasai's CSLearning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a><a class="post-meta__tags" href="/tags/Kubernetes/">Kubernetes</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/45c4147f/" title="搭建Kubernetes集群"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">搭建Kubernetes集群</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/45c4147f/" title="搭建Kubernetes集群"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-25</div><div class="title">搭建Kubernetes集群</div></div></a></div><div><a href="/posts/9acacb00/" title="Kubernetes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-27</div><div class="title">Kubernetes</div></div></a></div><div><a href="/posts/f2b5cbd9/" title="Golang入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-08</div><div class="title">Golang入门</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LegGasai</div><div class="author-info__description">作者描述</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LegGasai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LegGasai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jyc132780208@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_56522574" target="_blank" title="'#hdhfbb'"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog☺</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text">服务网格工作原理的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">场景描述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">步骤：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC%E6%8F%90%E4%BE%9B%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">服务网格提供的功能</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Istio"><span class="toc-number">3.</span> <span class="toc-text">Istio</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-number">3.1.</span> <span class="toc-text">功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E6%88%90"><span class="toc-number">3.2.</span> <span class="toc-text">构成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Envoy%EF%BC%88%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%EF%BC%89"><span class="toc-number">3.2.1.</span> <span class="toc-text">Envoy（数据平面）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Istiod%EF%BC%88%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2%EF%BC%89"><span class="toc-number">3.2.2.</span> <span class="toc-text">Istiod（控制平面）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/68588a2b/" title="服务网格">服务网格</a><time datetime="2024-09-25T05:20:04.000Z" title="发表于 2024-09-25 13:20:04">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/45c4147f/" title="搭建Kubernetes集群">搭建Kubernetes集群</a><time datetime="2024-09-25T05:16:57.000Z" title="发表于 2024-09-25 13:16:57">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f2b5cbd9/" title="Golang入门">Golang入门</a><time datetime="2024-06-08T09:19:14.000Z" title="发表于 2024-06-08 17:19:14">2024-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/fa82b526/" title="高性能大作业">高性能大作业</a><time datetime="2024-05-18T02:43:14.000Z" title="发表于 2024-05-18 10:43:14">2024-05-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/9acacb00/" title="Kubernetes">Kubernetes</a><time datetime="2024-04-27T03:18:26.000Z" title="发表于 2024-04-27 11:18:26">2024-04-27</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/footer.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By LegGasai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-vercel-aspa.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>面向NLP模型的字符级白盒对抗样本生成方法研究 | LegGasai's CSLearning</title><meta name="author" content="LegGasai"><meta name="copyright" content="LegGasai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="前置知识 白盒攻击：在机器学习模型的安全领域，攻击者如果具有关于模型的全部知识，包括模型的结构、参数和训练数据等，这种攻击被称为“白盒攻击”。攻击者利用这些信息生成对抗样本，目的是欺骗模型做出错误的预测。与之相对的，如果攻击者不知道模型的内部结构， 字符级：这意味着对抗性干扰发生在文本数据的最小单位——字符层面。通过在文本数据中添加、删除或替换单个字符，攻击者可以生成与原始数据在人类理解上几乎相同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向NLP模型的字符级白盒对抗样本生成方法研究">
+<meta property="og:url" content="https://leggasai.github.io/posts/3e53bfad/index.html">
+<meta property="og:site_name" content="LegGasai&#39;s CSLearning">
+<meta property="og:description" content="前置知识 白盒攻击：在机器学习模型的安全领域，攻击者如果具有关于模型的全部知识，包括模型的结构、参数和训练数据等，这种攻击被称为“白盒攻击”。攻击者利用这些信息生成对抗样本，目的是欺骗模型做出错误的预测。与之相对的，如果攻击者不知道模型的内部结构， 字符级：这意味着对抗性干扰发生在文本数据的最小单位——字符层面。通过在文本数据中添加、删除或替换单个字符，攻击者可以生成与原始数据在人类理解上几乎相同">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leggasai.github.io/img/avatar.PNG">
+<meta property="article:published_time" content="2024-04-23T13:22:03.000Z">
+<meta property="article:modified_time" content="2024-10-14T05:52:20.803Z">
+<meta property="article:author" content="LegGasai">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="论文">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leggasai.github.io/img/avatar.PNG"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leggasai.github.io/posts/3e53bfad/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '面向NLP模型的字符级白盒对抗样本生成方法研究',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-14 13:52:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top.png')"><nav id="nav"><span id="blog-info"><a href="/" title="LegGasai's CSLearning"><span class="site-name">LegGasai's CSLearning</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">面向NLP模型的字符级白盒对抗样本生成方法研究</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-23T13:22:03.000Z" title="发表于 2024-04-23 21:22:03">2024-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-14T05:52:20.803Z" title="更新于 2024-10-14 13:52:20">2024-10-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="面向NLP模型的字符级白盒对抗样本生成方法研究"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><ol>
+<li><strong>白盒攻击</strong>：在机器学习模型的安全领域，攻击者如果具有关于模型的全部知识，包括模型的结构、参数和训练数据等，这种攻击被称为“白盒攻击”。攻击者利用这些信息生成对抗样本，目的是欺骗模型做出错误的预测。与之相对的，如果攻击者不知道模型的内部结构，</li>
+<li><strong>字符级</strong>：这意味着对抗性干扰发生在文本数据的最小单位——字符层面。通过在文本数据中添加、删除或替换单个字符，攻击者可以生成与原始数据在人类理解上几乎相同，但在机器学习模型中可能导致不同输出的样本。</li>
+<li><strong>对抗样本</strong>：对抗样本是通过在原始数据上故意添加人类难以察觉的扰动生成的样本，目的是欺骗机器学习模型。在字符级对抗样本的情况下，这些扰动通常是对文本中的字符进行微小的修改。</li>
+<li><strong>对抗攻击</strong>：生成对抗样本让模型产生错误的输出称为对抗攻击。</li>
+</ol>
+<p>攻击粒度&#x2F;生成方法：幅度从大到小，更大地粒度更容易改变模型的输出结果。<br>句子级：<br>单词级：<br>字符级：<br><img src="/../../img/Pasted%20image%2020240425143417.png"></p>
+<h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><ul>
+<li>安全性：构造对抗样本干扰模型的输出，导致人工智能应用在关键领域出现判断失误、检测失效、隐私泄露等重大安全隐患。</li>
+</ul>
+<p>意义</p>
+<ul>
+<li>垃圾邮件分类检测，通过模型漏洞，构造样本来规避模型检测。</li>
+<li>通过生成对抗样本的训练，提升模型的鲁棒性。</li>
+</ul>
+<p>任务类型</p>
+<ul>
+<li>分类任务：整个输入对应一个标签。</li>
+<li>序列标注任务：句子-&gt;单词标签。</li>
+<li>机器翻译任务：序列-&gt;序列任务</li>
+</ul>
+<h1 id="二、相关工作"><a href="#二、相关工作" class="headerlink" title="二、相关工作"></a>二、相关工作</h1><p>介绍了目前流行的几种方法</p>
+<h2 id="句子级别"><a href="#句子级别" class="headerlink" title="句子级别"></a>句子级别</h2><p><img src="/../../img/Pasted%20image%2020240425145634.png"><br>添加句子、替换等价句子、转述句子、改变句子风格、重新生成句子</p>
+<h2 id="单词级别"><a href="#单词级别" class="headerlink" title="单词级别"></a>单词级别</h2><p>原地修改句子中的某些词汇<br><img src="/../../img/Pasted%20image%2020240425150256.png"></p>
+<h2 id="字符级别"><a href="#字符级别" class="headerlink" title="字符级别"></a>字符级别</h2><p><img src="/../../img/Pasted%20image%2020240425150731.png"></p>
+<h1 id="三、本文方法——CLTRA"><a href="#三、本文方法——CLTRA" class="headerlink" title="三、本文方法——CLTRA"></a>三、本文方法——CLTRA</h1><p><img src="/../../img/Pasted%20image%2020240425151727.png"></p>
+<p><strong>可替换字符串生成算法</strong><br>每个单词<strong>至少</strong>被分成三部分：<strong>首子词、中间子词（可能多个）、尾子词</strong>。子词是指在<strong>后缀词汇表</strong>中已经存在的。其中首子词和尾子词保证是<strong>最长匹配</strong>。然后只对中间子词进行扰动。从而重新拼接变成一个新的单词。<br><img src="/../../img/Pasted%20image%2020240426201019.png"><br><strong>最长匹配</strong>特点保证了在对中间子词进行扰动后，拼接成的新单词不会被分词器以和原来不同的切分方式切分。</p>
+<p>e.g.<br>原单词：algorithm<br>分词器切分后：a lgorith m<br>进行扰动：a l<em>d</em>orith m<br>拼接：aldorithm<br>分词器重新切分：aldo rith m（与原来切分方式不一致，应该被切分为a l<em>d</em>orith m）</p>
+<p><strong>后缀词汇表类别分布输入</strong></p>
+<h2 id="扰动范围"><a href="#扰动范围" class="headerlink" title="扰动范围"></a>扰动范围</h2><p>尽可能保证对抗样本s’和原样本s的相似性。</p>
+<p><strong>单词限制</strong>：取优先级最高的topk个单词进行扰动。<br>衡量指标：各个子词的梯度向量的二范数的均值<br><img src="/../../img/Pasted%20image%2020240426202012.png"></p>
+<p><strong>符宽限制</strong>：限制子词长度的变化。</p>
+<p><strong>形态相似限制</strong>：让被替换的子词和原子词看上去是“相似”的。比如love和1ove。<br>方法是生成每个子词的图片，衡量其视觉向量的相似度。</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>$Loss &#x3D; L_{Adv} + \lambda_{size}*L_{size} + \lambda_{vision}*L_{vision}$</p>
+<p>对抗损失函数、符宽限制系数，符宽损失函数、形态相似限制系数，形态相似损失函数</p>
+<h1 id="四、实验评估"><a href="#四、实验评估" class="headerlink" title="四、实验评估"></a>四、实验评估</h1><h2 id="分类任务"><a href="#分类任务" class="headerlink" title="分类任务"></a>分类任务</h2><p><strong>数据集</strong><br><img src="/../../img/Pasted%20image%2020240425194226.png"><br><strong>评价指标</strong></p>
+<ul>
+<li>准确率：来评估对抗样本是否攻击成功，越低越好。</li>
+<li>编辑距离：衡量对抗样本与原输入的扰动大小。越低意味着相似度更高。</li>
+<li>查询次数：在构造对抗样本时，查询目标模型的次数。越低越好，意味着成本和性能更优。<br><strong>基线方法</strong></li>
+<li>GBDA：目前最优秀的<strong>单词级白盒</strong>对抗样本生成方法</li>
+<li>DeepWordBug：<strong>字符级</strong>的<strong>黑盒</strong>对抗样本生成方法<br><strong>实验结果</strong><br><img src="/../../img/Pasted%20image%2020240425194617.png"><br><img src="/../../img/Pasted%20image%2020240425194856.png"></li>
+</ul>
+<h2 id="序列标注任务"><a href="#序列标注任务" class="headerlink" title="序列标注任务"></a>序列标注任务</h2><p><strong>命名实体识别任务</strong>：识别文本中的特定实体，并为这些实体分类。<br>Case：Apple Inc. announced its new product line in Cupertino on September 10th.</p>
+<ul>
+<li>Apple： (B-ORG)——组织名</li>
+<li>Cupertino： (B-LOC)——地点</li>
+</ul>
+<ul>
+<li>September ：(B-DATE)——时间</li>
+</ul>
+<p><strong>槽位抽取任务</strong>：从文本中抽取特定信息的值，如时间、地点、数量。依赖于NER的结果来识别并分类信息。<br>Case：I want to book a flight from New York to London on July 15th.</p>
+<ul>
+<li>意图：book a flight</li>
+<li>出发地：New York</li>
+<li>目的地：London</li>
+<li>日期：July 15th</li>
+</ul>
+<p><strong>数据集</strong><br><img src="/../../img/Pasted%20image%2020240425195422.png"></p>
+<p><strong>评价指标</strong></p>
+<ul>
+<li>F1-Score：Precision和Recall的调和平均，用于衡量查准率和查全率。</li>
+<li>实体攻击成功率：所有实体中攻击成功的实体的比例。判断标准是首个单词的B标签是否分类错误，B表示实体的开始。</li>
+<li>编辑距离：同任务1</li>
+<li>查询次数：同任务1</li>
+</ul>
+<p><strong>基线方法</strong></p>
+<ul>
+<li>Zeroe：基于视觉攻击，用特殊字符进行替换，其原理是因为BERT的词汇表不包含上述这些特殊字符，其会被映射为<code>[UNK]</code>，有效的破坏了单词的语义。</li>
+</ul>
+<p><strong>实验结果</strong><br><img src="/../../img/Pasted%20image%2020240425200026.png"><br><img src="/../../img/Pasted%20image%2020240425200055.png"></p>
+<p><strong>符宽限制系数和形态相似限制系数</strong><br>更大的形态相似限制系数，使得文本的扰动更小，因此编辑距离变小，导致实体攻击成功率降低。<br><img src="/../../img/Pasted%20image%2020240425200322.png"></p>
+<p>符宽限制系数对实体攻击成功率影响不大，但对编辑距离影响较大。<br><img src="/../../img/Pasted%20image%2020240425200439.png"></p>
+<h2 id="机器翻译任务"><a href="#机器翻译任务" class="headerlink" title="机器翻译任务"></a>机器翻译任务</h2><p><strong>数据集</strong><br><img src="/../../img/Pasted%20image%2020240425200646.png"><br><strong>评价指标</strong></p>
+<ul>
+<li>攻击成功率：对抗样本生成的翻译和参考翻译的BLUE 分数降低为原来的一半以下。</li>
+<li>相对BLUE降低值：整个数据集平均降低的 BLUE比例，是降低值与原来值的比。</li>
+<li>相对chrF降低值：整个数据集平均降低的 chrF比例，是降低值与原来值的比。字符级别。</li>
+<li>扰动百分比：对抗样本与原样本相比扰动的百分比。</li>
+</ul>
+<p><strong>基线模型</strong></p>
+<ul>
+<li>Seq2Sick：白盒攻击方法，梯度来构造词嵌入空间的扰动，再映射回离散序列。</li>
+<li>TransFool：白盒攻击方法，同上，但使用了词嵌入。</li>
+</ul>
+<p><strong>实验结果</strong><br><img src="/../../img/Pasted%20image%2020240425203148.png"><br><img src="/../../img/Pasted%20image%2020240425203154.png"><br><img src="/../../img/Pasted%20image%2020240425203232.png"><br><img src="/../../img/Pasted%20image%2020240425204604.png"><br><img src="/../../img/Pasted%20image%2020240425204624.png"></p>
+<h1 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li><strong>字符级</strong>粒度，意味着最高的相似程度，编辑距离值小，扰动范围小。</li>
+<li><strong>白盒方法</strong>，更少的模型查询次数，性能更优，充分利用了梯度。</li>
+<li><strong>普适性</strong>：在分类任务，序列标注任务，机器翻译任务上均取得了不错的效果。</li>
+<li><strong>创新型算法</strong>：可替换字符串上传算法；扰动限制损失函数</li>
+</ul>
+<h2 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h2><ul>
+<li>拓展其他任务：对于现有大模型的安全性、鲁棒性验证。</li>
+<li>面向中文：需要改造分词算法</li>
+<li>如何利用对抗样本：本文提出了构造对抗样本的方法，来揭示模型的缺陷和鲁棒性。如何利用对抗样本对模型进行强化？一种方式是将对抗样本作为训练集进行对抗训练。</li>
+</ul>
+<h1 id="六、"><a href="#六、" class="headerlink" title="六、"></a>六、</h1><h2 id="NLP-VS-LLM"><a href="#NLP-VS-LLM" class="headerlink" title="NLP VS LLM"></a>NLP VS LLM</h2><p>一些局限性：</p>
+<ul>
+<li>感觉本篇的工作可能是之前所做的，沉淀了一段时间，是在大语言模型出现之前的（模型基本都是用的BERT，也可以从他发表在EMNLP上的时间2022年推断出），试验了一下论文中提及的几个对抗样本，对现在的大语言模型似乎无效。作者也在未来展望中提到了未来运用到大模型上的一些想法。</li>
+</ul>
+<p>CASE 1：翻译任务<br><img src="/../../img/Pasted%20image%2020240425183443.png"></p>
+<p>大语言模型可以识别错误并正确地猜测出了原文，根本骗不到大模型~<br><img src="/../../img/Pasted%20image%2020240425183329.png"></p>
+<p>CASE 2：情感分类<br><img src="/../../img/Pasted%20image%2020240425183955.png"></p>
+<p>大语言模型依旧可以正确判断对抗样本，并且能够帮你进行<strong>纠错</strong>，比如<code>teruible -&gt; terrible</code><br><img src="/../../img/Pasted%20image%2020240425183944.png"></p>
+<p>CASE 3：序列标注任务<br><img src="/../../img/Pasted%20image%2020240425190426.png"></p>
+<p>可以正确标注，并且能够将对抗样本中的扰动 <code>baliimore -&gt; baltimore</code>进行纠正<br><img src="/../../img/Pasted%20image%2020240425190416.png"></p>
+<ul>
+<li>这篇文章我认为写的非常不错，提出了比较创新的算法，并通过详细的实验数据作为支撑，验证了其算法的高效性。（相关算法已发表在NLP领域顶会EMNLP，其有效性、真实性可保证）</li>
+<li>验证了一个观点，LLM的出现让传统NLP无路可走。</li>
+<li>不过值得注意的是，上述的训练集都来自领域内非常流行的公开语料库，不排除大模型使用它们进行了训练，所以才导致了对抗样本失效。</li>
+<li>由于目前大模型存在安全性、可解释性、幻觉等方面的缺陷，如果能通过有效的对抗样本学习来解决上述问题，是未来大模型优化的一个点。</li>
+</ul>
+<p>论文链接：<br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2210.17004.pdf">2210.17004.pdf (arxiv.org)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://leggasai.github.io">LegGasai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://leggasai.github.io/posts/3e53bfad/">https://leggasai.github.io/posts/3e53bfad/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://leggasai.github.io" target="_blank">LegGasai's CSLearning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87/">论文</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/6c92115f/" title="Spring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Spring</div></div></a></div><div class="next-post pull-right"><a href="/posts/9acacb00/" title="Kubernetes"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Kubernetes</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/98da000b/" title="On the Robustness of Code Generation Techniques:An Empirical Study on GitHub Copilot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-08</div><div class="title">On the Robustness of Code Generation Techniques:An Empirical Study on GitHub Copilot</div></div></a></div><div><a href="/posts/874f9a62/" title="组会分享"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-08</div><div class="title">组会分享</div></div></a></div><div><a href="/posts/887510fe/" title="Lang Chain介绍"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-06</div><div class="title">Lang Chain介绍</div></div></a></div><div><a href="/posts/d28c2f4/" title="Triangulating Python Performance Issues with SCALENE"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-09</div><div class="title">Triangulating Python Performance Issues with SCALENE</div></div></a></div><div><a href="/posts/29833d3b/" title="领域特定语言论文汇报"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-19</div><div class="title">领域特定语言论文汇报</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LegGasai</div><div class="author-info__description">作者描述</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LegGasai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LegGasai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jyc132780208@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_56522574" target="_blank" title="'#hdhfbb'"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog☺</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">前置知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">二、相关工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A5%E5%AD%90%E7%BA%A7%E5%88%AB"><span class="toc-number">3.1.</span> <span class="toc-text">句子级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E8%AF%8D%E7%BA%A7%E5%88%AB"><span class="toc-number">3.2.</span> <span class="toc-text">单词级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E7%BA%A7%E5%88%AB"><span class="toc-number">3.3.</span> <span class="toc-text">字符级别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%9C%AC%E6%96%87%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94CLTRA"><span class="toc-number">4.</span> <span class="toc-text">三、本文方法——CLTRA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%B0%E5%8A%A8%E8%8C%83%E5%9B%B4"><span class="toc-number">4.1.</span> <span class="toc-text">扰动范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">损失函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E9%AA%8C%E8%AF%84%E4%BC%B0"><span class="toc-number">5.</span> <span class="toc-text">四、实验评估</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.1.</span> <span class="toc-text">分类任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E6%A0%87%E6%B3%A8%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.2.</span> <span class="toc-text">序列标注任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.3.</span> <span class="toc-text">机器翻译任务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">五、总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">6.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="toc-number">6.2.</span> <span class="toc-text">未来展望</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81"><span class="toc-number">7.</span> <span class="toc-text">六、</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NLP-VS-LLM"><span class="toc-number">7.1.</span> <span class="toc-text">NLP VS LLM</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/68588a2b/" title="服务网格">服务网格</a><time datetime="2024-09-25T05:20:04.000Z" title="发表于 2024-09-25 13:20:04">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/45c4147f/" title="搭建Kubernetes集群">搭建Kubernetes集群</a><time datetime="2024-09-25T05:16:57.000Z" title="发表于 2024-09-25 13:16:57">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f2b5cbd9/" title="Golang入门">Golang入门</a><time datetime="2024-06-08T09:19:14.000Z" title="发表于 2024-06-08 17:19:14">2024-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/fa82b526/" title="高性能大作业">高性能大作业</a><time datetime="2024-05-18T02:43:14.000Z" title="发表于 2024-05-18 10:43:14">2024-05-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/9acacb00/" title="Kubernetes">Kubernetes</a><time datetime="2024-04-27T03:18:26.000Z" title="发表于 2024-04-27 11:18:26">2024-04-27</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/footer.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By LegGasai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-vercel-aspa.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
